@@ -2,9 +2,208 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title>Demo</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: "Microsoft YaHei UI";
+      position: static;
+      box-sizing: border-box;
+    }
+    input {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      outline: none;
+      padding: 0 0.75em;
+      font-size: 0.875em;
+      color: #515151;
+    }
+    input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{
+       color:#D2D2D2;
+    }
+    input:-moz-placeholder,textarea:-moz-placeholder{
+      color:#D2D2D2;
+    }
+    input::-moz-placeholder,textarea::-moz-placeholder{
+      color:#D2D2D2;
+    }
+    input:-ms-input-placeholder,textarea:-ms-input-placeholder{
+      color:#D2D2D2;
+    }
+    .content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: #66ccff;
+      min-width: 1280px;
+    }
+    .footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 10em;
+      background-color: #FFFFFF;
+      border-top: 0.15em solid #666666;
+    }
+    .panel {
+      position: absolute;
+      left: 37.5%;
+      bottom: 45%;
+      padding: 2em;
+      width: 25%;
+      background-color: #FFFFFF;
+      border-radius: 1.5em;
+      box-shadow: 0 0 1.5em rgba(51, 51, 51, 0.7);
+      max-width: 400px;
+    }
+    .icon {
+      height: 5rem;
+      width: 5rem;
+      margin: 0 auto;
+    }
+    #login-panel .input-container {
+      height: 3em;
+      margin-top: 1em;
+      padding: 0.5em 0.5em;
+      border: 0.1em solid #C5C5C5;
+      border-radius: 1em;
+    }
+
+    .pointer {
+      cursor: pointer;
+    }
+
+    .float-height:after{
+      content: "";
+      height: 100%;
+      display: block;
+      clear: both;
+      zoom: 1;
+    }
+    .login-btn {
+      width: 100%;
+      height: 2.5em;
+      line-height: 2.5em;
+      background-color: #66ccff;
+      margin-top: 1.5em;
+      color: #FFFFFF;
+      font-size: 1em;
+      text-align: center;
+      border-radius: 0.5em;
+    }
+    .common-input {
+      margin-top: 0.875em;
+    }
+    .common-input > .input-title {
+      float: left;
+      width: 30%;
+      height: 2.5em;
+      line-height: 3em;
+      font-size: 0.875em;
+    }
+    .common-input > .input-container {
+      float: right;
+      width: 70%;
+      height: 2.5em;
+      padding: 0.5em 0.5em;
+      border: 0.1em solid #C5C5C5;
+      border-radius: 1em;
+    }
+
+    #register-panel, #login-panel {
+      width: 100%;
+    }
+  </style>
 </head>
 <body>
+  <div class="content">
+    <div class="panel">
+      <div id="login-panel">
+        <div class="icon">
 
+        </div>
+        <div class="input-panel">
+          <div class="input-container">
+            <input id="username" type="text" placeholder="请输入用户名/手机号"/>
+          </div>
+          <div class="input-container">
+            <input id="password" type="password" placeholder="请输入密码"/>
+          </div>
+        </div>
+
+        <div class="float-height" style="font-size: 0.875em; margin-top: 1.25em; position: relative">
+          <div id="register" class="pointer float-height" style="float: left; width: 100%; text-align: center; color: #44aaee">立即注册</div>
+          <div id="forget" class="pointer float-height" style="float: right; color: #44aaee; display: none">忘记密码</div>
+        </div>
+
+        <div class="login-btn pointer">登&nbsp;&nbsp;&nbsp;&nbsp;录</div>
+      </div>
+
+      <div id="register-panel" style="display: none">
+        <div id="backToLogin" class="pointer" style="font-size: 0.75em; position: absolute; top: 2em; left: 2.5em; color: #55bbdd">返回登录</div>
+
+        <div class="input-panel">
+          <div class="float-height common-input">
+            <div class="input-title">
+              用户名：
+            </div>
+            <div class="input-container" style="">
+              <input id="registName" type="text" placeholder="请输入用户名"/>
+            </div>
+          </div>
+          <div class="float-height common-input">
+            <div class="input-title">
+              手机号：
+            </div>
+            <div class="input-container" style="">
+              <input id="mobileNumber" type="text" placeholder="请输入手机号"/>
+            </div>
+          </div>
+          <div class="float-height common-input">
+            <div class="input-title">
+              登录密码：
+            </div>
+            <div class="input-container" style="">
+              <input id="registPassword" type="password" placeholder="请输入密码"/>
+            </div>
+          </div>
+          <div class="float-height common-input">
+            <div class="input-title">
+              确认密码：
+            </div>
+            <div class="input-container" style="">
+              <input id="passwordRecheck" type="password" placeholder="请再次确认密码"/>
+            </div>
+          </div>
+        </div>
+
+        <div id="confirm" class="login-btn pointer">注&nbsp;&nbsp;&nbsp;&nbsp;册</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+
+  </div>
 </body>
+<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.9&key=dc4a6c4b00f306be58cc11e699a17211"></script>
+<script>
+    $(document).ready(function() {
+      $('#register').on('click', function() {
+          $('#login-panel').fadeOut(100, function() {
+              $('#register-panel').fadeIn(100);
+          });
+      });
+      $('#backToLogin').on('click', function() {
+          $('#register-panel').fadeOut(100, function() {
+              $('#login-panel').fadeIn(100);
+          });
+      });
+    });
+</script>
 </html>
