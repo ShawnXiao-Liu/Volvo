@@ -18,37 +18,82 @@
       background-color: #333333;
     }
     .page-container {
+      position: relative;
       width: 100%;
     }
     .menu-list {
       border-top: 2px solid #FFFFFF;
-      min-width: 280px;
-      max-width: 280px;
-      width: 20%;
+      min-width: 200px;
+      max-width: 200px;
+      width: 8%;
       height: 100%;
-      background-color: #333333;
-      float: left;
-      margin-right: 2%;
+      background-color: #515151;
     }
     .page-content {
-      border-top: 2px solid #FFFFFF;
-      width: 78%;
-      height: 100%;
-      float: right;
+      position: absolute;
+      top: 1.8em;
+      right: 0;
+      left: 210px;
+      bottom: 0;
     }
-    .menu-list .menu-item {
+    .menu-lv1 .menu-item {
       color: #FFFFFF;
       height: 3em;
-      font-size: 1.2em;
+      font-size: 1.1em;
       font-weight: 600;
-      border-bottom: 1px solid #FFFFFF;
+      border-bottom: 2px solid #FFFFFF;
       text-align: left;
       width: 100%;
       padding: 0 5% 0 15%;
       line-height: 3em;
     }
+    .menu-lv2 .menu-item {
+      color: #FFFFFF;
+      height: 2.8em;
+      font-size: 1em;
+      font-weight: 600;
+      border-bottom: 2px solid #FFFFFF;
+      text-align: left;
+      width: 100%;
+      padding: 0 5% 0 15%;
+      line-height: 2.8em;
+    }
+    .menu-lv2 {
+      display: none
+    }
     .menu-item:hover {
-      background-color: orange;
+      background-color: #44aaee;
+    }
+
+
+    .tag-container {
+      border-top: 2px solid #FFFFFF;
+      position: absolute;
+      top: 0em;
+      right: 0;
+      left: 210px;
+      height: 2em;
+      line-height: 2em;
+    }
+    .tag-container > .tag {
+      padding: -0.3em 0.2em 0 0.6em;
+      position: relative;
+      bottom: 0;
+      height: 100%;
+      border-top: 1px solid #515151;
+      border-left: 1px solid #515151;;
+      border-right: 1px solid #515151;
+      border-top-left-radius: 0.45em;
+      border-top-right-radius: 0.45em;
+    }
+    .tag > .tag-name {
+      font-size: 0.9em;
+      margin-right: 0.3em;
+    }
+    .tag > .tag-close {
+      font-size: 0.9em;
+      font-weight: 600;
+      color: #EE0000;
     }
   </style>
 </head>
@@ -58,42 +103,100 @@
   </div>
   <div class="page-container">
     <div class="menu-list">
-      <ul>
-        <li><div class="menu-item pointer" nav-to="roadMonitor">
-          路面施工监控
-        </div></li>
-        <li><div class="menu-item pointer" nav-to="historyMonitor">
-          历史路面监控
-        </div></li>
-        <li><div class="menu-item pointer" nav-to="roadView">
-          路面指标监控
-        </div></li>
-        <li><div class="menu-item pointer" nav-to="projectManagement">
-          施工项目管理
-        </div></li>
-        <li><div class="menu-item pointer" nav-to="contextAnalyse">
-          报表分析
-        </div></li>
-        <li><div class="menu-item pointer" nav-to="equipmentManagement">
-          设备管理
-        </div></li>
-        <li><div class="menu-item pointer" nav-to="userManagement">
-          用户管理
-        </div></li>
-        <li><div class="menu-item pointer" nav-to="authorityManagement">
-          权限管理
-        </div></li>
+      <ul class="menu-lv1">
+        <li>
+          <div class="menu-item pointer">
+            路面施工监控
+          </div>
+          <ul class="menu-lv2">
+            <li>
+              <div class="menu-item pointer" nav-to="roadMonitor">
+                路面施工监控1
+              </div>
+            </li>
+            <li>
+              <div class="menu-item pointer" nav-to="roadMonitor">
+                路面施工监控2
+              </div>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <div class="menu-item pointer" nav-to="historyMonitor">
+            历史路面监控
+          </div>
+        </li>
+        <li>
+          <div class="menu-item pointer" nav-to="roadView">
+            路面指标监控
+          </div>
+        </li>
+        <li>
+          <div class="menu-item pointer" nav-to="projectManagement">
+            施工项目管理
+          </div>
+        </li>
+        <li>
+          <div class="menu-item pointer" nav-to="contextAnalyse">
+            报表分析
+          </div>
+        </li>
+        <li>
+          <div class="menu-item pointer" nav-to="equipmentManagement">
+            设备管理
+          </div>
+        </li>
+        <li>
+          <div class="menu-item pointer" nav-to="userManagement">
+            用户管理
+          </div>
+        </li>
+        <li>
+          <div class="menu-item pointer" nav-to="authorityManagement">
+            权限管理
+          </div>
+        </li>
       </ul>
     </div>
-    <div class="page-content">
+    <div class="tag-container">
+
+    </div>
+    <div class="page-content" style="background-color: #39c6bb">
 
     </div>
   </div>
 </body>
 <script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
 <script>
+  var menuActived = [];
+
   $(document).ready(function() {
-     $('.page-container').height($(window).height() - $('.nav-bar').height());
+      $('.page-container').height($(window).height() - $('.nav-bar').height());
+
+      $('.menu-item').on('click', function() {
+         if ($(this).attr('nav-to')) {
+             var menuClicked = $(this).html().trim();
+             var route = $(this).attr('nav-to');
+
+             if (menuActived.indexOf(menuClicked) === -1) {
+                 menuActived.push(menuClicked);
+                 $('.tag-container').append( Tag(menuClicked) );
+             }
+             $('.page-content').load('views/' + route + '.html');
+         } else {
+             if ($(this).parent().hasClass('menu-active')) {
+                 $(this).parent().removeClass('menu-active').find('ul').stop().slideUp(200);
+             } else {
+                 $(this).parent().addClass('menu-active').find('ul').stop().slideDown(200);
+             }
+         }
+      });
   });
+  var Tag = function(tagName) {
+    return $('<span class="tag">\n' +
+        '      <span class="tag-name">' + tagName + '</span>\n' +
+        '      <span class="tag-close pointer">×</span>\n' +
+        '  </span>');
+  }
 </script>
 </html>
