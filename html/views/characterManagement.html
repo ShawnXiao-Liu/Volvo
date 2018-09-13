@@ -1,0 +1,97 @@
+<style>
+  .character-list {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0em;
+    width: 19em;
+    margin: 0.5em;
+    overflow-y: scroll;
+    border: 1px solid #D2D2D2;
+    color: #333333;
+  }
+  .character-info {
+    position: absolute;
+    left: 20em;
+    right: 0;
+    top: 0;
+    bottom: 0.5em;
+    margin: 0.5em;
+    margin-left: 0;
+    min-width: 960px;
+  }
+  .character-info > .character-auth-detail {
+    height: 40%;
+    background-color: #FFFFFF;
+  }
+  .character-info > .character-member-detail {
+    margin-top: 0.5em;
+    height: 60%;
+    background-color: #FFFFFF;
+  }
+  .character-list .character-item {
+    font-size: 0.875em;
+    padding: 0.25em;
+    border-bottom: 1px dashed #D2D2D2;
+  }
+  .character-item:hover {
+    background-color: #0066CC;
+    color: #FFFFFF;
+  }
+  table {
+    width: 100%;
+  }
+  table, th, td {
+    font-size: 0.975em;
+  }
+  th {
+    background-color: #66ccff;
+  }
+</style>
+<div class="character-list">
+  <ul style="background-color: #FFFFFF; height: 100%;">
+    <li class="character-item static pointer">
+      <div>admin</div>
+    </li>
+    <li class="character-item static pointer">
+      <div>config</div>
+    </li>
+    <li class="character-item static pointer">
+      <div>author</div>
+    </li>
+    <li class="character-item static pointer">
+      <div>生产商</div>
+    </li>
+    <li class="character-item static pointer">
+      <div>供应商</div>
+    </li>
+    <li class="character-item static pointer">
+      <div>施工方</div>
+    </li>
+  </ul>
+</div>
+
+<div class="character-info">
+  <div class="character-auth-detail">
+    <table border="1" cellspacing="0">
+      <tr>
+        <th width="15%">编号</th>
+        <th width="40%">用户名称</th>
+        <th width="30%">联系方式</th>
+        <th width="15%">操作</th>
+      </tr>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>啦啦啦啦</td>
+          <td>13074147777</td>
+          <td><button>删除</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="character-member-detail">
+    456
+  </div>
+</div>
