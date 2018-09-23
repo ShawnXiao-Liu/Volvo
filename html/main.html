@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="../css/common.css">
@@ -19,6 +19,7 @@
     }
     .page-container {
       width: 100%;
+      position: relative;
     }
     .menu-list {
       border-top: 2px solid #FFFFFF;
@@ -28,13 +29,17 @@
       height: 100%;
       background-color: #333333;
       float: left;
-      margin-right: 2%;
+      margin-right: 10px;
     }
     .page-content {
-      border-top: 2px solid #FFFFFF;
-      width: 78%;
-      height: 100%;
-      float: right;
+      position: absolute;
+      left: 290px;
+      right: 5px;
+      bottom: 5px;
+      top: 5px;
+      border: 2px solid #333333;
+      border-radius: 0.5em;
+      padding: 0.5em;
     }
     .menu-list .menu-item {
       color: #FFFFFF;
@@ -95,5 +100,12 @@
   $(document).ready(function() {
      $('.page-container').height($(window).height() - $('.nav-bar').height());
   });
+
+  $('[nav-to]').on('click', function() {
+    var url = $(this).attr('nav-to');
+    $('.page-content').load('views/' + url + '.html');
+  })
+  $('[nav-to="authorityManagement"]').trigger('click');
+
 </script>
 </html>
