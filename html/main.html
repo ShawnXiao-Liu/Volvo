@@ -255,9 +255,61 @@
       text-align: center;
       float: right;
     }
+
+    .window-mask {
+      position: fixed;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+    }
+    .window-mask > .window-container {
+      position: absolute;
+      left: 10%;
+      right: 10%;
+      top: 10%;
+      bottom: 10%;
+      border-radius: 0.8em;
+      border: 1px solid #515151;
+      box-shadow: 0 0 1em #515151;
+    }
+    .window-container > .window-nav-bar {
+      position: absolute;
+      background-color: #66ccff;
+      border-top-left-radius: 0.8em;
+      border-top-right-radius: 0.8em;
+      box-shadow: 0 0.1em 4px #999999;
+      top: 0;
+      height: 42px;
+      z-index: 100;
+      width: 100%;
+    }
+    .window-container > .window-content {
+      position: absolute;
+      background-color: #FFFFFF;
+      border-bottom-left-radius: 0.8em;
+      border-bottom-right-radius: 0.8em;
+      top: 42px;
+      bottom: 0;
+      width: 100%;
+    }
+
   </style>
 </head>
 <body>
+  <div class="window-mask">
+    <div class="window-container">
+      <div class="window-nav-bar">
+
+      </div>
+      <div class="window-content">
+
+      </div>
+    </div>
+  </div>
+
   <div class="nav-bar">
 
   </div>
