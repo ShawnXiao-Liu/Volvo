@@ -1,0 +1,200 @@
+<div class="user-form">
+  <div class="form-title">
+    <div class="blue-block"></div>
+    <div class="title">
+      标段管理
+    </div>
+  </div>
+  <div class="form-body">
+    <table>
+      <tbody>
+        <tr>
+          <td>
+            <div class="input-container">
+              <div class="input-label">
+                标段名称:
+              </div>
+              <div class="input-content">
+                <input placeholder="" type="text"/>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="input-container">
+              <div class="input-label">
+                所属工程编号:
+              </div>
+              <div class="input-content">
+                <input placeholder="" type="text"/>
+              </div>
+            </div>
+          </td>
+          <td colspan="2">
+            <div class="input-container">
+              <div class="input-label" style="width: 14%">
+                工程位置:
+              </div>
+              <div class="input-content" style="width: 86%; left: 14%">
+                <input placeholder="" type="text"/>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="input-container">
+              <div class="input-label">
+                标段预估开始:
+              </div>
+              <div class="input-content">
+                <input placeholder="" type="text"/>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="input-container">
+              <div class="input-label">
+                标段预估结束:
+              </div>
+              <div class="input-content">
+                <input placeholder="" type="text"/>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="input-container">
+              <div class="input-label">
+                标段实际开始:
+              </div>
+              <div class="input-content">
+                <input placeholder="" type="text"/>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="input-container">
+              <div class="input-label">
+                标段实际结束:
+              </div>
+              <div class="input-content">
+                <input placeholder="" type="text"/>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="input-container">
+              <div class="input-label">
+                上级标段:
+              </div>
+              <div class="input-content">
+                <input placeholder="" type="text"/>
+              </div>
+            </div>
+          </td>
+
+          <td>
+            <div class="input-container">
+              <div class="input-label">
+                标段长度:
+              </div>
+              <div class="input-content">
+                <input placeholder="" type="text"/>
+              </div>
+            </div>
+          </td>
+
+          <td>
+            <div class="input-container">
+              <div class="input-label">
+                标段宽度:
+              </div>
+              <div class="input-content">
+                <input placeholder="" type="text"/>
+              </div>
+            </div>
+          </td>
+
+          <td>
+            <button>新增</button>
+            <button>查询</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="user-table">
+  <div class="table-title">
+    <div class="blue-block"></div>
+    <div class="title">设备信息明细</div>
+  </div>
+  <div class="table-body">
+    <div class="table-data">
+      <table border="1">
+        <thead class="table-head">
+          <tr>
+            <th>标段名称</th>
+            <th>标段位置</th>
+            <th>所属工程</th>
+            <th>承包商</th>
+            <th>上级标段</th>
+            <th>标段宽度</th>
+            <th>标段长度</th>
+            <th>标段预估开始</th>
+            <th>标段预估结束</th>
+            <th>标段实际开始</th>
+            <th>标段实际结束</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>表格数据1</td>
+          <td>表格数据2</td>
+          <td>表格数据3</td>
+          <td>表格数据4</td>
+          <td>表格数据5</td>
+          <td>表格数据6</td>
+          <td>表格数据7</td>
+          <td>表格数据8</td>
+          <td>表格数据9</td>
+          <td>表格数据10</td>
+          <td>表格数据11</td>
+          <td>删除\修改</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="table-footer">
+      <button class="pagnition-next">下一页</button>
+      <button class="pagnition-prev">上一页</button>
+      <div class="page-num">
+        256
+      </div>
+      <div class="page-num">
+        ...
+      </div>
+      <div class="page-num">
+        3
+      </div>
+      <div class="page-num">
+        2
+      </div>
+      <div class="page-num">
+        1
+      </div>
+      <div class="current-page">
+        当前第<span style="padding: 0 0.3em;">1</span>页
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  (function() {
+    $('.table-head').width($('.table-data').find('table').width() + 2);
+    $('.table-body').height($('.page-content').height() - $('.user-form').height() - $('.table-title').height() - 36);
+    $('.table-data').height($('.table-body').height() - $('.table-title').height() - $('.table-footer').height());
+  })();
+</script>

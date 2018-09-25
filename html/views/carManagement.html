@@ -1,0 +1,147 @@
+<div class="user-form">
+  <div class="form-title">
+    <div class="blue-block"></div>
+    <div class="title">
+      车辆管理
+    </div>
+  </div>
+  <div class="form-body">
+    <table>
+      <tbody>
+        <tr>
+          <td>
+            <div class="input-container">
+              <div class="input-label">
+                车辆名称:
+              </div>
+              <div class="input-content">
+                <input placeholder="" type="text"/>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="input-container">
+              <div class="input-label">
+                车辆所属人员:
+              </div>
+              <div class="input-content">
+                <input placeholder="" type="text"/>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="input-container">
+              <div class="input-label">
+                所属标段:
+              </div>
+              <div class="input-content">
+                <input placeholder="" type="text"/>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="input-container">
+              <div class="input-label">
+                车辆碾压宽度:
+              </div>
+              <div class="input-content">
+                <input placeholder="" type="text"/>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="input-container">
+              <div class="input-label">
+                绑定设备编号:
+              </div>
+              <div class="input-content">
+                <input placeholder="" type="text"/>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="input-container">
+              <div class="input-label">
+                车辆状态:
+              </div>
+              <div class="input-content">
+                <input placeholder="" type="text"/>
+              </div>
+            </div>
+          </td>
+          <td>
+          </td>
+          <td>
+            <button>新增</button>
+            <button>查询</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="user-table">
+  <div class="table-title">
+    <div class="blue-block"></div>
+    <div class="title">设备信息明细</div>
+  </div>
+  <div class="table-body">
+    <div class="table-data">
+      <table border="1">
+        <thead class="table-head">
+        <tr>
+          <th>设备编号</th>
+          <th>设备名称</th>
+          <th>设备类型</th>
+          <th>工作时间</th>
+          <th>回传时间</th>
+          <th>入网时间</th>
+          <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>表格数据1</td>
+          <td>表格数据2</td>
+          <td>表格数据3</td>
+          <td>表格数据4</td>
+          <td>表格数据5</td>
+          <td>表格数据6</td>
+          <td>删除\修改</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="table-footer">
+      <button class="pagnition-next">下一页</button>
+      <button class="pagnition-prev">上一页</button>
+      <div class="page-num">
+        256
+      </div>
+      <div class="page-num">
+        ...
+      </div>
+      <div class="page-num">
+        3
+      </div>
+      <div class="page-num">
+        2
+      </div>
+      <div class="page-num">
+        1
+      </div>
+      <div class="current-page">
+        当前第<span style="padding: 0 0.3em;">1</span>页
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  (function() {
+    $('.table-head').width($('.table-data').find('table').width() + 2);
+    $('.table-body').height($('.page-content').height() - $('.user-form').height() - $('.table-title').height() - 36);
+    $('.table-data').height($('.table-body').height() - $('.table-title').height() - $('.table-footer').height());
+  })();
+</script>

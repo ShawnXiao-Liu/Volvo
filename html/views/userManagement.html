@@ -1,3 +1,129 @@
-<div>
-  用户管理
+<div class="user-form">
+  <div class="form-title">
+    <div class="blue-block"></div>
+    <div class="title">
+      运行设备管理
+    </div>
+  </div>
+  <div class="form-body">
+    <table>
+      <tbody>
+      <tr>
+        <td>
+          <div class="input-container">
+            <div class="input-label">
+              用户姓名:
+            </div>
+            <div class="input-content">
+              <input placeholder="" type="text"/>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div class="input-container">
+            <div class="input-label">
+              手机号:
+            </div>
+            <div class="input-content">
+              <input placeholder="" type="text"/>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div class="input-container">
+            <div class="input-label">
+              用户账号:
+            </div>
+            <div class="input-content">
+              <input placeholder="" type="text"/>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div class="input-container">
+            <div class="input-label">
+              用户角色:
+            </div>
+            <div class="input-content">
+              <input placeholder="" type="text"/>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+        </td>
+
+        <td>
+        </td>
+
+        <td>
+        </td>
+
+        <td>
+          <button>查询</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
+<div class="user-table">
+  <div class="table-title">
+    <div class="blue-block"></div>
+    <div class="title">用户详细信息</div>
+  </div>
+  <div class="table-body">
+    <div class="table-data">
+      <table border="1">
+        <thead class="table-head">
+        <tr>
+          <th>姓名</th>
+          <th>手机号</th>
+          <th>账号</th>
+          <th>角色名称</th>
+          <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>表格数据1</td>
+          <td>表格数据2</td>
+          <td>表格数据3</td>
+          <td>表格数据4</td>
+          <td>删除\修改</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="table-footer">
+      <button class="pagnition-next">下一页</button>
+      <button class="pagnition-prev">上一页</button>
+      <div class="page-num">
+        256
+      </div>
+      <div class="page-num">
+        ...
+      </div>
+      <div class="page-num">
+        3
+      </div>
+      <div class="page-num">
+        2
+      </div>
+      <div class="page-num">
+        1
+      </div>
+      <div class="current-page">
+        当前第<span style="padding: 0 0.3em;">1</span>页
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  (function() {
+    $('.table-head').width($('.table-data').find('table').width() + 2);
+    $('.table-body').height($('.page-content').height() - $('.user-form').height() - $('.table-title').height() - 36);
+    $('.table-data').height($('.table-body').height() - $('.table-title').height() - $('.table-footer').height());
+  })();
+</script>

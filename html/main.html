@@ -78,15 +78,19 @@
       line-height: 2em;
     }
     .tag-container > .tag {
-      padding: 0.1em 0.2em 0 0.6em;
+      margin-left: 1px;
+      padding: 0.1em 0.2em 2px 0.6em;
       position: relative;
       bottom: 0;
       height: 100%;
-      border-top: 1px solid #515151;
-      border-left: 1px solid #515151;;
-      border-right: 1px solid #515151;
+      border-top: 2px solid #515151;
+      border-left: 2px solid #515151;;
+      border-right: 2px solid #515151;
       border-top-left-radius: 0.45em;
       border-top-right-radius: 0.45em;
+    }
+    .tag:first-child {
+      margin: 0;
     }
     .tag > .tag-name {
       font-size: 0.9em;
@@ -96,6 +100,160 @@
       font-size: 0.9em;
       font-weight: 600;
       color: #EE0000;
+    }
+    .page-content {
+      position: absolute;
+      left: 210px;
+      right: 10px;
+      bottom: 10px;
+      top: 30px;
+      border: 2px solid #333333;
+      padding: 0.5em;
+      border-top-right-radius: 0.5em;
+      border-bottom-right-radius: 0.5em;
+      border-bottom-left-radius: 0.5em;
+    }
+    .tag:hover {
+      background-color: #D1D1D1;
+      box-shadow: 0 0px 5px rgba(0, 0, 0, 0.75);
+    }
+    table {
+      border-collapse: collapse;
+    }
+    .user-form {
+      width: 100%;
+      padding-bottom: 0.5em;
+    }
+    .user-form > .form-title, .user-table > .table-title {
+      width: 100%;
+      font-size: 1.25em;
+      font-weight: 600;
+      position: relative;
+      height: 1.5em;
+      line-height: 1.5em;
+    }
+    .form-title > .title, .table-title > .title {
+      height: 100%;
+      position: absolute;
+      left: 0.8em;
+      top: 0;
+    }
+    .form-title > .blue-block, .table-title > .blue-block {
+      height: 64%;
+      width: 0.4em;
+      position: absolute;
+      left: 0;
+      top: 18%;
+      background-color: #44aaee;
+    }
+    .user-form > .form-body, .user-table > .table-body {
+      margin-top: 0.475em;
+      width: 100%;
+      border: 2px solid #333333;
+      border-radius: 0.5em;
+      padding: 0.5em 0.75em;
+    }
+    .form-body table, tbody, tr, .table-body table, tbody, tr {
+      width: 100%;
+    }
+    .form-body tr{
+      height: 3em;
+    }
+    .form-body td {
+      width: 25%;
+    }
+    .table-head th {
+      border: 1px solid #33aaef;
+      border-right: 1px solid #FFFFFF;
+      border-left: 1px solid #FFFFFF;
+      border-bottom: 0;
+      background-color: #33aaef;
+      color: #FFFFFF
+    }
+    .table-head th:first-child {
+      border-left: 1px solid #33aaef;
+    }
+    .table-head th:last-child {
+      border-right: 1px solid #33aaef;
+    }
+    .table-body tr {
+      height: 1.8em;
+    }
+    .table-body th, td {
+      text-align: center;
+    }
+    .table-body > .table-data {
+      width: 100%;
+      overflow-y: scroll;
+    }
+    .input-container {
+      position: relative;
+      width: 100%;
+      height: 2em;
+    }
+    .input-container > .input-label, .input-container > .input-content {
+      height: 100%;
+      position: absolute;
+      font-size: 0.9125em;
+      line-height: 2.5em;
+      top: 0;
+    }
+    .input-container > .input-label {
+      left: 0;
+      width: 28%;
+      padding-right: 0.875em;
+      text-align: right;
+    }
+    .input-container > .input-content {
+      left: 28%;
+      width: 72%;
+    }
+    .input-content input {
+      height: 100%;
+      font-size: 1em;
+      padding-right: 0.5em;
+      border-radius: 0.25em;
+      border: 1px solid #515151;
+    }
+
+    .table-data tr:nth-child(odd)
+    {
+      background:#D2D2D2;
+    }
+    .table-data tr:nth-child(even)
+    {
+      background:#FFFFFF;
+    }
+    .table-footer {
+      position: absolute;
+      padding: 0.5em;
+      bottom: 0.5em;
+      right: 2.5em;
+    }
+    .table-footer > .current-page{
+      float: right;
+      height: 100%;
+      line-height: 2.25em;
+    }
+    .table-footer > .page-num {
+      height: 2.2em;
+      line-height: 2.2em;
+      padding: 0 0.8em;
+      border: 1px solid #333333;
+      float: right;
+      margin-left: 0.3em;
+      text-align: center;
+      cursor: pointer;
+    }
+    .page-num:hover {
+      background-color: #ccbbcc;
+    }
+    .pagnition-prev, .pagnition-next {
+      margin-left: 0.5em;
+      height: 2.6em;
+      width: 6em;
+      text-align: center;
+      float: right;
     }
   </style>
 </head>
@@ -107,7 +265,7 @@
     <div class="menu-list">
       <ul class="menu-lv1">
         <li>
-          <div class="menu-item pointer">
+          <div class="menu-item pointer" style="display: none">
             路面施工监控
           </div>
           <ul class="menu-lv2">
@@ -124,12 +282,12 @@
           </ul>
         </li>
         <li>
-          <div class="menu-item pointer" nav-to="historyMonitor">
+          <div class="menu-item pointer" nav-to="historyMonitor" style="display: none">
             历史路面监控
           </div>
         </li>
         <li>
-          <div class="menu-item pointer" nav-to="roadView">
+          <div class="menu-item pointer" nav-to="roadView" style="display: none">
             路面指标监控
           </div>
         </li>
@@ -139,7 +297,7 @@
           </div>
         </li>
         <li>
-          <div class="menu-item pointer" nav-to="contextAnalyse">
+          <div class="menu-item pointer" nav-to="contextAnalyse" style="display: none">
             报表分析
           </div>
         </li>
@@ -163,20 +321,28 @@
             权限管理
           </div>
         </li>
+        <li>
+          <div class="menu-item pointer" nav-to="labelManagement">
+            标段管理
+          </div>
+        </li>
+        <li>
+          <div class="menu-item pointer" nav-to="carManagement">
+            车辆管理
+          </div>
+        </li>
       </ul>
     </div>
     <div class="tag-container">
 
     </div>
-    <div class="page-content" style="background-color: #39c6bb">
+    <div class="page-content">
 
     </div>
   </div>
 </body>
 <script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
 <script>
-  var menuActived = [];
-
   $(document).ready(function() {
       $('.page-container').height($(window).height() - $('.nav-bar').height());
 
@@ -185,16 +351,42 @@
              var menuClicked = $(this).html().trim();
              var route = $(this).attr('nav-to');
 
-             if (menuActived.indexOf(menuClicked) === -1) {
-                 menuActived.push(menuClicked);
+             if ( !$(this).parent().hasClass('menu-active') ) {
+                 $(this).parent().addClass('menu-active')
                  $('.tag-container').append( Tag(menuClicked) );
+                 $('.tag-close').off().on('click', function(event) {
+                     event.stopPropagation();
+                     $(this).parents('.tag').fadeOut(100, function() {
+                         var tag2close = $(this);
+                         $('.menu-active').each(function() {
+                             if ($(this).find('.menu-item').html().trim() ===
+                               tag2close.find('.tag-name').html().trim()) {
+
+                                 $(this).removeClass('menu-active');
+                                 tag2close.fadeOut(100, function() {
+                                     tag2close.remove();
+                                 });
+                             }
+                         });
+                     })
+                 });
+
+                 $('.tag').off().on('click', function() {
+                   var tagClicked = $(this);
+                   $('.menu-active').each(function() {
+                     console.log($(this))
+                     if ($(this).find('.menu-item').html().trim() === tagClicked.find('.tag-name').html().trim()) {
+                       $(this).find('.menu-item').trigger('click');
+                     }
+                   });
+                 });
              }
              $('.page-content').load('views/' + route + '.html');
          } else {
              if ($(this).parent().hasClass('menu-active')) {
-                 $(this).parent().removeClass('menu-active').find('ul').stop().slideUp(200);
+                $(this).parent().removeClass('menu-active').find('ul').stop().slideUp(200);
              } else {
-                 $(this).parent().addClass('menu-active').find('ul').stop().slideDown(200);
+                $(this).parent().addClass('menu-active').find('ul').stop().slideDown(200);
              }
          }
       });
