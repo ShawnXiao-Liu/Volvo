@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="../css/common.css">
@@ -10,6 +10,13 @@
     }
     li {
       list-style: none;
+    }
+    td {
+      position: relative;
+    }
+    button {
+      border: 0;
+      outline: 0;
     }
 
     .nav-bar {
@@ -88,6 +95,8 @@
       border-right: 2px solid #515151;
       border-top-left-radius: 0.45em;
       border-top-right-radius: 0.45em;
+      background-color: #D1D1D1;
+      box-shadow: 0 0px 5px rgba(0, 0, 0, 0.75);
     }
     .tag:first-child {
       margin: 0;
@@ -113,9 +122,15 @@
       border-bottom-right-radius: 0.5em;
       border-bottom-left-radius: 0.5em;
     }
+    .tag-active {
+      background-color: #FFFFFF !important;
+      box-shadow: none !important;
+      z-index: 100;
+      border-bottom: 2px solid #FFFFFF;
+    }
     .tag:hover {
-      background-color: #D1D1D1;
-      box-shadow: 0 0px 5px rgba(0, 0, 0, 0.75);
+      background-color: #FFFFFF;
+      box-shadow: none;
     }
     table {
       border-collapse: collapse;
@@ -215,6 +230,13 @@
       border-radius: 0.25em;
       border: 1px solid #515151;
     }
+    .page-content td[colspan='2'] .input-label {
+      width: 14%;
+    }
+    .page-content td[colspan='2'] .input-content {
+      left: 14%;
+      width: 86%;
+    }
 
     .table-data tr:nth-child(odd)
     {
@@ -264,6 +286,7 @@
       bottom: 0;
       background-color: rgba(0, 0, 0, 0.5);
       z-index: 1000;
+      display: none;
     }
     .window-mask > .window-container {
       position: absolute;
@@ -294,15 +317,85 @@
       top: 42px;
       bottom: 0;
       width: 100%;
+      padding: 1.5em;
     }
 
+    .window-content .input-label {
+      width: 35%;
+    }
+    .window-content .input-content {
+      left: 35%;
+      width: 65%;
+    }
+    #closeMask {
+      color: #EE0000;
+      font-size: 1.5em;
+      font-weight: 600;
+      position: absolute;
+      right: 0.5em;
+      padding: 6px;
+      height: 100%;
+      top: 0;
+      cursor: pointer;
+    }
+    .window-content td[colspan='2'] .input-label {
+      width: 17.5%;
+    }
+    .window-content td[colspan='2'] .input-content {
+      left: 17.5%;
+      width: 82.5%;
+    }
+
+    .window-content button {
+      font-size: 1em;
+      color: #FFFFFF;
+      letter-spacing: 4px;
+      border-radius: 0.5em;
+      width: 15%;
+      height: 2.75em;
+      position: absolute;
+      bottom: 1.5em;
+    }
+    .user-form button {
+      font-size: 1em;
+      color: #FFFFFF;
+      letter-spacing: 4px;
+      border-radius: 0.5em;
+      width: 40%;
+      height: 2.75em;
+    }
+    .user-form button:first-child {
+      margin-left: 13%;
+    }
+    .user-form button:last-child {
+      margin-left: 5%;
+    }
+    .btn-act {
+      opacity: 0.6;
+    }
+
+    .c-blue {
+      background-color: #41c3f5;
+    }
+    .c-green {
+      background-color: #1fc711;
+    }
+    .c-confirm {
+      background-color: #1dcd9e;
+    }
+    .c-cancel {
+      background-color: #ff6767;
+    }
+    .c-delete {
+      background-color: #fb3e3e;
+    }
   </style>
 </head>
 <body>
   <div class="window-mask">
     <div class="window-container">
       <div class="window-nav-bar">
-
+        <div id="closeMask">×</div>
       </div>
       <div class="window-content">
 
@@ -402,6 +495,14 @@
          if ($(this).attr('nav-to')) {
              var menuClicked = $(this).html().trim();
              var route = $(this).attr('nav-to');
+             var curHtml = $(this).html().trim();
+              $('.tag').removeClass('tag-active');
+             $('.tag').each(function() {
+                if ($(this).find('.tag-name').html().trim() === curHtml) {
+                  $(this).addClass('tag-active');
+                }
+             });
+
 
              if ( !$(this).parent().hasClass('menu-active') ) {
                  $(this).parent().addClass('menu-active')
@@ -417,6 +518,11 @@
                                  $(this).removeClass('menu-active');
                                  tag2close.fadeOut(100, function() {
                                      tag2close.remove();
+                                     if ( $('.tag-active').length === 0 ) {
+                                       $('.tag').eq(0).click();
+                                       if ($('.tag').eq(0).length === 0)
+                                         $('.page-content').html('');
+                                     }
                                  });
                              }
                          });
@@ -424,9 +530,9 @@
                  });
 
                  $('.tag').off().on('click', function() {
-                   var tagClicked = $(this);
+                   $('.tag').removeClass('tag-active');
+                   var tagClicked = $(this).addClass('tag-active');
                    $('.menu-active').each(function() {
-                     console.log($(this))
                      if ($(this).find('.menu-item').html().trim() === tagClicked.find('.tag-name').html().trim()) {
                        $(this).find('.menu-item').trigger('click');
                      }
@@ -443,11 +549,15 @@
          }
       });
 
-      $(".menu-item[nav-to='characterManagement']").click();
+      $(".menu-item[nav-to='carManagement']").click();
+
+      $('#closeMask').on('click', function() {
+        $('.window-mask').fadeOut(200).find('.window-content').html('');
+      });
   });
 
   var Tag = function(tagName) {
-    return $('<span class="tag">\n' +
+    return $('<span class="tag tag-active">\n' +
         '      <span class="tag-name">' + tagName + '</span>\n' +
         '      <span class="tag-close pointer">×</span>\n' +
         '  </span>');

@@ -31,10 +31,10 @@
           </td>
           <td colspan="2">
             <div class="input-container">
-              <div class="input-label" style="width: 14%">
+              <div class="input-label">
                 工程位置:
               </div>
-              <div class="input-content" style="width: 86%; left: 14%">
+              <div class="input-content">
                 <input placeholder="" type="text"/>
               </div>
             </div>
@@ -117,8 +117,8 @@
           </td>
 
           <td>
-            <button>新增</button>
-            <button>查询</button>
+            <button class="insert c-green">新增</button>
+            <button class="query c-blue">查询</button>
           </td>
         </tr>
       </tbody>
@@ -196,5 +196,27 @@
     $('.table-head').width($('.table-data').find('table').width() + 2);
     $('.table-body').height($('.page-content').height() - $('.user-form').height() - $('.table-title').height() - 36);
     $('.table-data').height($('.table-body').height() - $('.table-title').height() - $('.table-footer').height());
+
+    $('.insert').on('click', function() {
+      $('.window-mask').fadeIn(200);
+      $('.window-content').html('<div class="user-form">' +  $('.user-form').html() + '</div>' ).find('button').remove();
+      var formHeight = $('.window-content').find('.user-form').height();
+      $('.window-content').height(formHeight + 64).append('<button class="confirm c-confirm" style="left:34.5%">确认</button><button class="cancel c-cancel" style="left:50.5%">取消</button>');
+
+      $('button').off('mousedown').on('mousedown', function() {
+        $(this).addClass('btn-act');
+      });
+      $('button').off('mouseup').on('mouseup', function() {
+        $(this).removeClass('btn-act');
+      });
+
+      $('.confirm').on('click', function() {
+        $('.window-mask').fadeOut(200).find('.window-content').html('');
+      });
+      $('.cancel').on('click', function() {
+        $('.window-mask').fadeOut(200).find('.window-content').html('');
+      });
+    });
+
   })();
 </script>
