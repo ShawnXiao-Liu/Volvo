@@ -37,7 +37,7 @@ input:-ms-input-placeholder,textarea:-ms-input-placeholder{
   zoom: 1;
 }
 .common-input {
-  margin-top: 0.875em;
+  margin-top: 1.2em;
 }
 .common-input > .input-title {
   float: left;

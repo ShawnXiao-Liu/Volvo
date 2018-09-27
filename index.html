@@ -6,7 +6,23 @@
   <link rel="stylesheet" href="css/common.css">
   <link rel="stylesheet" href="css/index.css">
   <style>
-
+    .common-input {
+      position: relative;
+    }
+    .tips {
+      font-size: 0.4em;
+      left: 30%;
+      width: 70%;
+      padding-left: 1.25em;
+      position: absolute;
+      bottom: -1.5em;
+    }
+    .error-tips {
+      color: #EE0000;
+    }
+    .success-tips {
+      color: #1fc711;
+    }
   </style>
 </head>
 <body>
@@ -30,7 +46,7 @@
           <div id="forget" class="pointer float-height" style="float: right; color: #44aaee; display: none">忘记密码</div>
         </div>
 
-        <div class="login-btn pointer">登&nbsp;&nbsp;&nbsp;&nbsp;录</div>
+        <div id="login" class="login-btn pointer">登&nbsp;&nbsp;&nbsp;&nbsp;录</div>
       </div>
 
       <div id="register-panel" style="display: none">
@@ -42,7 +58,15 @@
               用户名：
             </div>
             <div class="input-container" style="">
-              <input id="registName" type="text" placeholder="请输入用户名"/>
+              <input id="name" bind-to="name" type="text" placeholder="请输入用户名"/>
+            </div>
+          </div>
+          <div class="float-height common-input">
+            <div class="input-title">
+              登陆账号：
+            </div>
+            <div class="input-container" style="">
+              <input id="account" bind-to="account" type="text" placeholder="请输入登陆账号"/>
             </div>
           </div>
           <div class="float-height common-input">
@@ -50,7 +74,7 @@
               手机号：
             </div>
             <div class="input-container" style="">
-              <input id="mobileNumber" type="text" placeholder="请输入手机号"/>
+              <input id="tel" bind-to="tel" type="text" placeholder="请输入手机号"/>
             </div>
           </div>
           <div class="float-height common-input">
@@ -58,7 +82,7 @@
               登录密码：
             </div>
             <div class="input-container" style="">
-              <input id="registPassword" type="password" placeholder="请输入密码"/>
+              <input id="pwd" bind-to="pwd" type="password" placeholder="请输入密码"/>
             </div>
           </div>
           <div class="float-height common-input">
@@ -66,12 +90,12 @@
               确认密码：
             </div>
             <div class="input-container" style="">
-              <input id="passwordRecheck" type="password" placeholder="请再次确认密码"/>
+              <input id="pwdCheck" type="password" placeholder="请再次确认密码"/>
             </div>
           </div>
         </div>
 
-        <div id="confirm" class="login-btn pointer">注&nbsp;&nbsp;&nbsp;&nbsp;册</div>
+        <div id="confirmRegister" class="login-btn pointer">注&nbsp;&nbsp;&nbsp;&nbsp;册</div>
       </div>
     </div>
   </div>
@@ -94,9 +118,60 @@
           });
       });
 
-      $('.login-btn').on('click', function() {
-        window.location.href = 'html/main.html';
+      $('#login').on('click', function() {
+          var account = $('#username').val();
+          var pwd = $('#password').val();
+
+          window.location.href = 'html/main.html';
+      });
+
+      $('#confirmRegister').on('click', function() {
+          var dataMap = {};
+          $('[bind-to]').each(function() {
+            dataMap[$(this).attr('bind-to')] = $(this).val();
+          });
+          if (dataMap['name'] === ""){
+              addErrorTips($('[bind-to="name"]').parents('.common-input'), '用户名不能为空');
+              return false;
+          }
+          if (dataMap['account'].length < 5) {
+              addErrorTips($('[bind-to="account"]').parents('.common-input'), '注册账号长度不能小于5位');
+              return false;
+          }
+          if (dataMap['tel'] === ""){
+              addErrorTips($('[bind-to="tel"]').parents('.common-input'), '请填写手机号');
+              return false;
+          }
+          if(!(/^1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8}$/.test(dataMap['tel'])) || dataMap['tel'].length !== 11){
+              addErrorTips($('[bind-to="tel"]').parents('.common-input'), '请填写正确的手机号');
+              return false;
+          }
+          if (dataMap['pwd'].length < 6) {
+              addErrorTips($('[bind-to="pwd"]').parents('.common-input'), '密码成都不能小于6位');
+              return false;
+          }
+          if (dataMap['pwd'].length > 16) {
+              addErrorTips($('[bind-to="pwd"]').parents('.common-input'), '密码成都不能长于16位');
+              return false;
+          }
+          if (dataMap['pwd'] !== $('#pwdCheck').val()) {
+              addErrorTips($('#pwdCheck').parents('.common-input'), '请再次确认密码正确');
+              return false;
+          }
       })
     });
+
+    $('input').on('click', function() {
+        $('.tips').remove();
+    });
+
+    function addErrorTips(el, message) {
+        $('.tips').remove();
+        el.append('<div class="tips error-tips">'  +message + '</div>');
+    }
+    function addSuccessTips(el, message) {
+        $('.tips').remove();
+        el.append('<div class="tips success-tips">'  +message + '</div>');
+    }
 </script>
 </html>
