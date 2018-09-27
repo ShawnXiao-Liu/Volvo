@@ -135,6 +135,7 @@
                 },
                 success:function (response) {
                     console.log(response);
+                    addSuccessTips($(this).parents('.common-input'), "恭喜你，账号可以使用")
                     alert('success');
                 },
                 error: function(error) {
