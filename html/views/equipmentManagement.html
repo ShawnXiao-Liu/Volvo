@@ -6,107 +6,99 @@
     </div>
   </div>
   <div class="form-body">
-    <table>
+    <table id="equipementManagementForm">
       <tbody>
-      <tr>
-        <td>
-          <div class="input-container">
-            <div class="input-label">
-              设备名称:
+        <tr>
+          <td>
+            <div class="input-container">
+              <div class="input-label">
+                设备名称:
+              </div>
+              <div class="input-content">
+                <input bind-to="equipmentName" placeholder="" type="text"/>
+              </div>
             </div>
-            <div class="input-content">
-              <input placeholder="" type="text"/>
+          </td>
+          <td>
+            <div class="input-container">
+              <div class="input-label">
+                设备编号:
+              </div>
+              <div class="input-content">
+                <input bind-to="equipmentCode" placeholder="" type="text"/>
+              </div>
             </div>
-          </div>
-        </td>
-        <td>
-          <div class="input-container">
-            <div class="input-label">
-              设备编号:
-            </div>
-            <div class="input-content">
-              <input placeholder="" type="text"/>
-            </div>
-          </div>
-        </td>
-        <td>
-          <div class="input-container">
-            <div class="input-label">
-              设备类型:
-            </div>
-            <div class="input-content">
-              <select></select>
-            </div>
-          </div>
-        </td>
-        <td>
-          <div class="input-container">
-            <div class="input-label">
-              工作时间:
-            </div>
-            <div class="input-content">
-              <input placeholder="" type="text"/>
-            </div>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="input-container">
-            <div class="input-label">
-              回传时间:
-            </div>
-            <div class="input-content">
-              <input placeholder="" type="text"/>
-            </div>
-          </div>
-        </td>
-        <td>
-          <div class="input-container">
-            <div class="input-label">
-              入网时间:
-            </div>
-            <div class="input-content">
-              <input placeholder="" type="text"/>
-            </div>
-          </div>
-        </td>
-        <td>
-          <div class="input-container">
-            <div class="input-label">
-              地理位置:
-            </div>
-            <div class="input-content">
-              <input placeholder="" type="text"/>
-            </div>
-          </div>
-        </td>
-        <td>
-          <div class="input-container">
-            <div class="input-label">
-              设备所有人:
-            </div>
-            <div class="input-content">
-              <input placeholder="" type="text"/>
-            </div>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>
-        </td>
+          </td>
+          <td>
+            <div class="input-container">
+              <div class="input-label">
+                设备类型:
+              </div>
+              <div class="input-content">
+                <select id="equipmentType" bind-to="equipmentType">
 
-        <td>
-        </td>
+                </select>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="input-container">
+              <div class="input-label">
+                工作时间:
+              </div>
+              <div class="input-content">
+                <input bind-to="workTime" placeholder="" type="text"/>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="input-container">
+              <div class="input-label">
+                回传时间:
+              </div>
+              <div class="input-content">
+                <input bind-to="lastBackTime" placeholder="" type="text"/>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="input-container">
+              <div class="input-label">
+                入网时间:
+              </div>
+              <div class="input-content">
+                <input bind-to="joinTime" placeholder="" type="text"/>
+              </div>
+            </div>
+          </td>
+          <td colspan="2">
+            <div class="input-container">
+              <div class="input-label">
+                地理位置:
+              </div>
+              <div class="input-content">
+                <input bind-to="location" placeholder="" type="text"/>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          </td>
 
-        <td>
-        </td>
+          <td>
+          </td>
 
-        <td>
-          <button class="insert c-green">新增</button>
-          <button class="query c-blue">查询</button>
-        </td>
-      </tr>
+          <td>
+          </td>
+
+          <td>
+            <button class="insert c-green">新增</button>
+            <button class="query c-blue">查询</button>
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -118,17 +110,16 @@
   </div>
   <div class="table-body">
     <div class="table-data">
-      <table border="1">
+      <table border="1" id="equipmentManagementTable">
         <thead class="table-head">
           <tr>
-            <th>设备编号</th>
-            <th>设备名称</th>
-            <th>设备类型</th>
-            <th>工作时间</th>
-            <th>回传时间</th>
-            <th>入网时间</th>
-            <th>地理位置</th>
-            <th>设备所有人</th>
+            <th bind-to="equipmentId">设备编号</th>
+            <th bind-to="equipmentName">设备名称</th>
+            <th bind-to="equipmentType">设备类型</th>
+            <th bind-to="workTime">工作时间</th>
+            <th bind-to="laskBackTime">回传时间</th>
+            <th bind-to="joinTime">入网时间</th>
+            <th bind-to="location">地理位置</th>
             <th>操作</th>
           </tr>
         </thead>
@@ -140,7 +131,6 @@
             <td>表格数据4</td>
             <td>表格数据5</td>
             <td>表格数据6</td>
-            <td>表格数据7</td>
             <td>表格数据7</td>
             <td>删除\修改</td>
           </tr>
@@ -173,29 +163,15 @@
 </div>
 <script>
   (function() {
-    $('.table-head').width($('.table-data').find('table').width() + 2);
-    $('.table-body').height($('.page-content').height() - $('.user-form').height() - $('.table-title').height() - 36);
-    $('.table-data').height($('.table-body').height() - $('.table-title').height() - $('.table-footer').height());
-
-    $('.insert').on('click', function() {
-      $('.window-mask').fadeIn(200);
-      $('.window-content').html('<div class="user-form">' +  $('.user-form').html() + '</div>' ).find('button').remove();
-      var formHeight = $('.window-content').find('.user-form').height();
-      $('.window-content').height(formHeight + 64).append('<button class="confirm c-confirm" style="left:34.5%">确认</button><button class="cancel c-cancel" style="left:50.5%">取消</button>');
-
-      $('button').off('mousedown').on('mousedown', function() {
-        $(this).addClass('btn-act');
-      });
-      $('button').off('mouseup').on('mouseup', function() {
-        $(this).removeClass('btn-act');
+    $('.query').on('click', function() {
+      var dataObj = {};
+      $('.user-form').find("input[bind-to]").each(function() {
+        var param = $(this).attr('bind-to');
+        var value = $(this).val();
+        if (value)
+          dataObj[param] = value;
       });
 
-      $('.confirm').on('click', function() {
-        $('.window-mask').fadeOut(200).find('.window-content').html('');
-      });
-      $('.cancel').on('click', function() {
-        $('.window-mask').fadeOut(200).find('.window-content').html('');
-      });
     });
 
   })();

@@ -140,30 +140,6 @@
 </div>
 <script>
   (function() {
-    $('.table-head').width($('.table-data').find('table').width() + 2);
-    $('.table-body').height($('.page-content').height() - $('.user-form').height() - $('.table-title').height() - 36);
-    $('.table-data').height($('.table-body').height() - $('.table-title').height() - $('.table-footer').height());
-
-    $('.insert').on('click', function() {
-      $('.window-mask').fadeIn(200);
-      $('.window-content').html('<div class="user-form">' +  $('.user-form').html() + '</div>' ).find('button').remove();
-      var formHeight = $('.window-content').find('.user-form').height();
-      $('.window-content').height(formHeight + 64).append('<button class="confirm c-confirm" style="left:34.5%">确认</button><button class="cancel c-cancel" style="left:50.5%">取消</button>');
-
-      $('button').off('mousedown').on('mousedown', function() {
-        $(this).addClass('btn-act');
-      });
-      $('button').off('mouseup').on('mouseup', function() {
-        $(this).removeClass('btn-act');
-      });
-
-      $('.confirm').on('click', function() {
-        $('.window-mask').fadeOut(200).find('.window-content').html('');
-      });
-      $('.cancel').on('click', function() {
-        $('.window-mask').fadeOut(200).find('.window-content').html('');
-      });
-    });
 
   })();
 </script>

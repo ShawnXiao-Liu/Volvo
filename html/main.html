@@ -239,7 +239,7 @@
     }
     .page-content td[colspan='2'] .input-content {
       left: 15%;
-      width: 85%;
+      width: 82.5%;
     }
 
     .table-data tr:nth-child(odd)
@@ -368,7 +368,7 @@
       height: 2.75em;
     }
     .user-form button:first-child {
-      margin-left: 13%;
+      margin-left: 5%;
     }
     .user-form button:last-child {
       margin-left: 5%;
@@ -499,7 +499,7 @@
              var menuClicked = $(this).html().trim();
              var route = $(this).attr('nav-to');
              var curHtml = $(this).html().trim();
-              $('.tag').removeClass('tag-active');
+             $('.tag').removeClass('tag-active');
              $('.tag').each(function() {
                 if ($(this).find('.tag-name').html().trim() === curHtml) {
                   $(this).addClass('tag-active');
@@ -542,7 +542,31 @@
                    });
                  });
              }
-             $('.page-content').load('views/' + route + '.html');
+             $('.page-content').load('views/' + route + '.html', function() {
+               $('.table-head').width($('.table-data').find('table').width() + 2);
+               $('.table-body').height($('.page-content').height() - $('.user-form').height() - $('.table-title').height() - 36);
+               $('.table-data').height($('.table-body').height() - $('.table-title').height() - $('.table-footer').height());
+               $('button').off('mousedown').on('mousedown', function() {
+                 $(this).addClass('btn-act');
+               });
+               $('button').off('mouseup').on('mouseup', function() {
+                 $(this).removeClass('btn-act');
+               });
+
+               $('.insert').on('click', function() {
+                 $('.window-mask').fadeIn(200);
+                 $('.window-content').html('<div class="user-form">' +  $('.user-form').html() + '</div>' ).find('button').remove();
+                 var formHeight = $('.window-content').find('.user-form').height();
+                 $('.window-content').height(formHeight + 64).append('<button class="confirm c-confirm" style="left:34.5%">确认</button><button class="cancel c-cancel" style="left:50.5%">取消</button>');
+
+                 $('.confirm').on('click', function() {
+                   $('.window-mask').fadeOut(200).find('.window-content').html('');
+                 });
+                 $('.cancel').on('click', function() {
+                   $('.window-mask').fadeOut(200).find('.window-content').html('');
+                 });
+               });
+             });
          } else {
              if ($(this).parent().hasClass('menu-active')) {
                 $(this).parent().removeClass('menu-active').find('ul').stop().slideUp(200);
@@ -564,6 +588,28 @@
         '      <span class="tag-name">' + tagName + '</span>\n' +
         '      <span class="tag-close pointer">×</span>\n' +
         '  </span>');
+  };
+
+  function bindData(el, data, hasControl) {
+    var htmlStr = '';
+    if (hasControl)
+      hasControl = false;
+    for (var i = 0; i <data.length; i++) {
+      var d = data[i];
+
+      var trHtml = "<tr>";
+      $(el).find('th[bind-to]').each(function() {
+        var pam = $(this).attr('bind-to');
+        trHtml += '<td>' + d[pam] + '</td>'
+      });
+      if (hasControl) {
+        trHtml += '<td>删除/修改</td></tr>'
+      } else {
+        trHtml += '</tr>'
+      }
+      htmlStr += trHtml;
+    }
+    $(el).find('tbody').html(htmlStr);
   }
 </script>
 </html>
