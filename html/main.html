@@ -491,10 +491,24 @@
 </body>
 <script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
 <script>
+  var confirmEvent = new Function();
+  var cancelEvent = new Function();
+  var updateEvent = new Function();
+  var deleteEvent = new Function();
+  var queryEvent = new Function();
+
   $(document).ready(function() {
       $('.page-container').height($(window).height() - $('.nav-bar').height());
 
       $('.menu-item').on('click', function() {
+         // 清空新页面的方法参数
+         confirmEvent = new Function();
+         cancelEvent = new Function();
+         updateEvent = new Function();
+         deleteEvent = new Function();
+         queryEvent = new Function();
+
+         // 跳转方法
          if ($(this).attr('nav-to')) {
              var menuClicked = $(this).html().trim();
              var route = $(this).attr('nav-to');
@@ -543,9 +557,13 @@
                  });
              }
              $('.page-content').load('views/' + route + '.html', function() {
+
+               // 初始化表格高度
                $('.table-head').width($('.table-data').find('table').width() + 2);
                $('.table-body').height($('.page-content').height() - $('.user-form').height() - $('.table-title').height() - 36);
                $('.table-data').height($('.table-body').height() - $('.table-title').height() - $('.table-footer').height());
+
+               // 全局button设置点击事件
                $('button').off('mousedown').on('mousedown', function() {
                  $(this).addClass('btn-act');
                });
@@ -553,6 +571,7 @@
                  $(this).removeClass('btn-act');
                });
 
+               // insert按键自带属性。
                $('.insert').on('click', function() {
                  $('.window-mask').fadeIn(200);
                  $('.window-content').html('<div class="user-form">' +  $('.user-form').html() + '</div>' ).find('button').remove();
@@ -561,10 +580,26 @@
 
                  $('.confirm').on('click', function() {
                    $('.window-mask').fadeOut(200).find('.window-content').html('');
+                   confirmEvent();
                  });
+
                  $('.cancel').on('click', function() {
                    $('.window-mask').fadeOut(200).find('.window-content').html('');
+                   cancelEvent();
                  });
+               });
+
+               // query按键自带属性
+               $('.query').on('click', function() {
+                 var dataObj = {};
+                 $('.user-form').find("input[bind-to]").each(function() {
+                   var param = $(this).attr('bind-to');
+                   var value = $(this).val();
+                   if (value)
+                     dataObj[param] = value;
+                 });
+
+                 queryEvent();
                });
              });
          } else {
@@ -590,6 +625,7 @@
         '  </span>');
   };
 
+  // 动态绑定数据的方法
   function bindData(el, data, hasControl) {
     var htmlStr = '';
     if (hasControl)
