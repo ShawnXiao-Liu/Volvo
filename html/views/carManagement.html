@@ -6,7 +6,7 @@
     </div>
   </div>
   <div class="form-body">
-    <table>
+    <table id="carManagementForm">
       <tbody>
         <tr>
           <td>
@@ -15,17 +15,17 @@
                 车辆名称:
               </div>
               <div class="input-content">
-                <input placeholder="" type="text"/>
+                <input bind-to="vehicleName" placeholder="" type="text"/>
               </div>
             </div>
           </td>
           <td>
             <div class="input-container">
               <div class="input-label">
-                车辆所属人员:
+                绑定设备编号:
               </div>
               <div class="input-content">
-                <input placeholder="" type="text"/>
+                <input bind-to="equipmentId" placeholder="" type="text"/>
               </div>
             </div>
           </td>
@@ -35,7 +35,7 @@
                 所属标段:
               </div>
               <div class="input-content">
-                <input placeholder="" type="text"/>
+                <input bind-to="partId" placeholder="" type="text"/>
               </div>
             </div>
           </td>
@@ -45,22 +45,12 @@
                 车辆碾压宽度:
               </div>
               <div class="input-content">
-                <input placeholder="" type="text"/>
+                <input bind-to="vehicleRollingWidth" placeholder="" type="text"/>
               </div>
             </div>
           </td>
         </tr>
         <tr>
-          <td>
-            <div class="input-container">
-              <div class="input-label">
-                绑定设备编号:
-              </div>
-              <div class="input-content">
-                <input placeholder="" type="text"/>
-              </div>
-            </div>
-          </td>
           <td>
             <div class="input-container">
               <div class="input-label">
@@ -70,6 +60,8 @@
                 <input placeholder="" type="text"/>
               </div>
             </div>
+          </td>
+          <td>
           </td>
           <td>
           </td>
@@ -89,7 +81,7 @@
   </div>
   <div class="table-body">
     <div class="table-data">
-      <table border="1">
+      <table border="1" id="carManagementTable">
         <thead class="table-head">
         <tr>
           <th>设备编号</th>
@@ -140,6 +132,21 @@
 </div>
 <script>
   (function() {
+    cancelEvent = function() {
 
+    };
+    updateEvent = function() {
+
+    };
+    deleteEvent = function() {
+
+    };
+    queryEvent = function() {
+
+    };
+
+    confirmEvent = function() {
+
+    };
   })();
 </script>

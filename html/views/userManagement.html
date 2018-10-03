@@ -6,7 +6,7 @@
     </div>
   </div>
   <div class="form-body">
-    <table>
+    <table id="userManagementForm">
       <tbody>
       <tr>
         <td>
@@ -15,7 +15,7 @@
               用户姓名:
             </div>
             <div class="input-content">
-              <input  placeholder="" type="text"/>
+              <input bind-to="name" placeholder="" type="text"/>
             </div>
           </div>
         </td>
@@ -25,7 +25,7 @@
               手机号:
             </div>
             <div class="input-content">
-              <input placeholder="" type="text"/>
+              <input bind-to="tel" placeholder="" type="text"/>
             </div>
           </div>
         </td>
@@ -35,7 +35,7 @@
               用户账号:
             </div>
             <div class="input-content">
-              <input placeholder="" type="text"/>
+              <input bind-to="account" placeholder="" type="text"/>
             </div>
           </div>
         </td>
@@ -45,7 +45,7 @@
               用户角色:
             </div>
             <div class="input-content">
-              <input placeholder="" type="text"/>
+              <input bind-to="ruleName" placeholder="" type="text"/>
             </div>
           </div>
         </td>
@@ -75,13 +75,13 @@
   </div>
   <div class="table-body">
     <div class="table-data">
-      <table border="1">
+      <table border="1" id="userManagementTable">
         <thead class="table-head">
         <tr>
-          <th>姓名</th>
-          <th>手机号</th>
-          <th>账号</th>
-          <th>角色名称</th>
+          <th bind-to="name">姓名</th>
+          <th bind-to="tel">手机号</th>
+          <th bind-to="account">账号</th>
+          <th bind-to="ruleName">角色名称</th>
           <th>操作</th>
         </tr>
         </thead>
@@ -122,6 +122,21 @@
 </div>
 <script>
   (function() {
+    cancelEvent = function() {
 
+    };
+    updateEvent = function() {
+
+    };
+    deleteEvent = function() {
+
+    };
+    queryEvent = function() {
+
+    };
+
+    confirmEvent = function() {
+
+    };
   })();
 </script>

@@ -626,14 +626,14 @@
   };
 
   // 动态绑定数据的方法
-  function bindData(el, data, hasControl) {
+  function bindData(el, data, mainKey, hasControl) {
     var htmlStr = '';
     if (hasControl)
       hasControl = false;
     for (var i = 0; i <data.length; i++) {
       var d = data[i];
 
-      var trHtml = "<tr>";
+      var trHtml = "<tr p-key='" + d[mainKey] + "'>";
       $(el).find('th[bind-to]').each(function() {
         var pam = $(this).attr('bind-to');
         trHtml += '<td>' + d[pam] + '</td>'

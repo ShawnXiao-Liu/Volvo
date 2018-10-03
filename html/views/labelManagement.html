@@ -6,7 +6,7 @@
     </div>
   </div>
   <div class="form-body">
-    <table>
+    <table id="labelManagementForm">
       <tbody>
         <tr>
           <td>
@@ -15,7 +15,7 @@
                 标段名称:
               </div>
               <div class="input-content">
-                <input placeholder="" type="text"/>
+                <input bind-to="partName" placeholder="" type="text"/>
               </div>
             </div>
           </td>
@@ -25,7 +25,7 @@
                 所属工程编号:
               </div>
               <div class="input-content">
-                <input placeholder="" type="text"/>
+                <input bind-to="engineeringId" placeholder="" type="text"/>
               </div>
             </div>
           </td>
@@ -35,7 +35,7 @@
                 工程位置:
               </div>
               <div class="input-content">
-                <input placeholder="" type="text"/>
+                <input bind-to="partLocation" placeholder="" type="text"/>
               </div>
             </div>
           </td>
@@ -47,7 +47,7 @@
                 标段预估开始:
               </div>
               <div class="input-content">
-                <input placeholder="" type="text"/>
+                <input bind-to="partPredictStart" placeholder="" type="text"/>
               </div>
             </div>
           </td>
@@ -57,7 +57,7 @@
                 标段预估结束:
               </div>
               <div class="input-content">
-                <input placeholder="" type="text"/>
+                <input bind-to="partPredictEnd" placeholder="" type="text"/>
               </div>
             </div>
           </td>
@@ -67,7 +67,7 @@
                 标段实际开始:
               </div>
               <div class="input-content">
-                <input placeholder="" type="text"/>
+                <input bind-to="partRealisticStart" placeholder="" type="text"/>
               </div>
             </div>
           </td>
@@ -77,22 +77,12 @@
                 标段实际结束:
               </div>
               <div class="input-content">
-                <input placeholder="" type="text"/>
+                <input bind-to="partRealisticEnd" placeholder="" type="text"/>
               </div>
             </div>
           </td>
         </tr>
         <tr>
-          <td>
-            <div class="input-container">
-              <div class="input-label">
-                上级标段:
-              </div>
-              <div class="input-content">
-                <input placeholder="" type="text"/>
-              </div>
-            </div>
-          </td>
 
           <td>
             <div class="input-container">
@@ -100,7 +90,7 @@
                 标段长度:
               </div>
               <div class="input-content">
-                <input placeholder="" type="text"/>
+                <input  bind-to="partLength" placeholder="" type="text"/>
               </div>
             </div>
           </td>
@@ -111,9 +101,11 @@
                 标段宽度:
               </div>
               <div class="input-content">
-                <input placeholder="" type="text"/>
+                <input  bind-to="partWidth" placeholder="" type="text"/>
               </div>
             </div>
+          </td>
+          <td>
           </td>
 
           <td>
@@ -132,20 +124,18 @@
   </div>
   <div class="table-body">
     <div class="table-data">
-      <table border="1">
+      <table border="1" id="labelManagementTable">
         <thead class="table-head">
           <tr>
-            <th>标段名称</th>
-            <th>标段位置</th>
-            <th>所属工程</th>
-            <th>承包商</th>
-            <th>上级标段</th>
-            <th>标段宽度</th>
-            <th>标段长度</th>
-            <th>标段预估开始</th>
-            <th>标段预估结束</th>
-            <th>标段实际开始</th>
-            <th>标段实际结束</th>
+            <th bind-to="partName">标段名称</th>
+            <th bind-to="partLocation">标段位置</th>
+            <th bind-to="engineeringId">所属工程</th>
+            <th bind-to="partWidth">标段宽度</th>
+            <th bind-to="partLength">标段长度</th>
+            <th bind-to="partPredictStart">标段预估开始</th>
+            <th bind-to="partPredictEnd">标段预估结束</th>
+            <th bind-to="partRealisticStart">标段实际开始</th>
+            <th bind-to="partRealisticEnd">标段实际结束</th>
             <th>操作</th>
           </tr>
         </thead>
@@ -160,8 +150,6 @@
           <td>表格数据7</td>
           <td>表格数据8</td>
           <td>表格数据9</td>
-          <td>表格数据10</td>
-          <td>表格数据11</td>
           <td>删除\修改</td>
         </tr>
         </tbody>
@@ -193,6 +181,21 @@
 </div>
 <script>
   (function() {
+    cancelEvent = function() {
 
+    };
+    updateEvent = function() {
+
+    };
+    deleteEvent = function() {
+
+    };
+    queryEvent = function() {
+
+    };
+
+    confirmEvent = function() {
+
+    };
   })();
 </script>

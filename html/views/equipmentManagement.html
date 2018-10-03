@@ -6,7 +6,7 @@
     </div>
   </div>
   <div class="form-body">
-    <table id="equipementManagementForm">
+    <table id="equipmentManagementForm">
       <tbody>
         <tr>
           <td>
@@ -163,19 +163,21 @@
 </div>
 <script>
   (function() {
-    $('.query').on('click', function() {
-      var dataObj = {};
-      $('.user-form').find("input[bind-to]").each(function() {
-        var param = $(this).attr('bind-to');
-        var value = $(this).val();
-        if (value)
-          dataObj[param] = value;
-      });
-      // TODO 前台查询方法
-    });
+    cancelEvent = function() {
+
+    };
+    updateEvent = function() {
+
+    };
+    deleteEvent = function() {
+
+    };
+    queryEvent = function() {
+
+    };
 
     confirmEvent = function() {
-      alert('老婆我爱你');
-    }
+
+    };
   })();
 </script>
