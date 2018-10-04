@@ -229,7 +229,7 @@
       height: 100%;
       width: 100%;
       font-size: 1em;
-      padding-right: 0.5em;
+      padding: 0 0.5em;
       border-radius: 0.25em;
       border: 1px solid #515151;
       outline: none;
@@ -507,6 +507,7 @@
   var updateEvent = new Function();
   var deleteEvent = new Function();
   var queryEvent = new Function();
+  var insertEvent = new Function();
 
   function cleanEvent() {
     // 清空新页面的方法参数
@@ -516,6 +517,7 @@
     updateEvent = new Function();
     deleteEvent = new Function();
     queryEvent = new Function();
+    insertEvent = new Function();
   }
 
   $(document).ready(function() {
@@ -595,16 +597,19 @@
                    $('.window-content').html('<div class="user-form">' +  $('.user-form').html() + '</div>' ).find('button').remove();
                    var formHeight = $('.window-content').find('.user-form').height();
                    $('.window-content').height(formHeight + 64).append('<button class="confirm c-confirm" style="left:34.5%">确认</button><button class="cancel c-cancel" style="left:50.5%">取消</button>');
-
                    $('.confirm').on('click', function() {
+                     confirmEvent($('.window-content').find('.user-form'));
+
                      $('.window-mask').fadeOut(200).find('.window-content').html('');
-                     confirmEvent(this);
                    });
 
                    $('.cancel').on('click', function() {
+                     cancelEvent($('.window-content').find('.user-form'));
+
                      $('.window-mask').fadeOut(200).find('.window-content').html('');
-                     cancelEvent(this);
                    });
+
+                   insertEvent($('.window-content').find('.user-form'));
                  });
 
                  // update按键自带属性
@@ -616,14 +621,17 @@
                    $('.window-content').height(formHeight + 64).append('<button class="confirm c-confirm" style="left:34.5%">确认</button><button class="cancel c-cancel" style="left:50.5%">取消</button>');
 
                    $('.confirm').on('click', function() {
+                     confirmEvent($('.window-content').find('.user-form'));
+
                      $('.window-mask').fadeOut(200).find('.window-content').html('');
-                     confirmEvent(this);
                    });
 
                    $('.cancel').on('click', function() {
+                     cancelEvent($('.window-content').find('.user-form'));
+
                      $('.window-mask').fadeOut(200).find('.window-content').html('');
-                     cancelEvent(this);
                    });
+                   updateEvent($('.window-content').find('.user-form'));
                  });
 
                  // query按键自带属性
