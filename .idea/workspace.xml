@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="735cdafa-231e-418e-b25c-3fb3fb7456df" name="Default Changelist" comment="Oct 1st">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/main.html" afterPath="$PROJECT_DIR$/html/main.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/views/userManagement.html" afterPath="$PROJECT_DIR$/html/views/userManagement.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -310,7 +308,7 @@
       <workItem from="1538363961274" duration="410000" />
       <workItem from="1538394223311" duration="599000" />
       <workItem from="1538462886054" duration="6700000" />
-      <workItem from="1538544653396" duration="9596000" />
+      <workItem from="1538544653396" duration="9602000" />
     </task>
     <task id="LOCAL-00001" summary="Oct 1st">
       <created>1538364139359</created>
@@ -361,11 +359,18 @@
       <option name="project" value="LOCAL" />
       <updated>1538550984996</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Oct 1st">
+      <created>1538640858072</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1538640858072</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64566000" />
+    <option name="totallyTimeSpent" value="64572000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
