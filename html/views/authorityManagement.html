@@ -6,174 +6,26 @@
     </div>
   </div>
   <div class="form-body">
-    <table>
+    <table id="roleManagementForm">
       <tbody>
         <tr>
           <td>
             <div class="input-container">
               <div class="input-label">
-                用户姓名:
+                角色名称:
               </div>
               <div class="input-content">
-                <input placeholder="请输入用户姓名" type="text"/>
+                <input bind-to="ruleName" placeholder="请输入用户姓名" type="text"/>
               </div>
             </div>
           </td>
           <td>
-            <div class="input-container">
-              <div class="input-label">
-                用户姓名:
-              </div>
-              <div class="input-content">
-                <input placeholder="请输入用户姓名" type="text"/>
-              </div>
-            </div>
           </td>
           <td>
-            <div class="input-container">
-              <div class="input-label">
-                用户姓名:
-              </div>
-              <div class="input-content">
-                <input placeholder="请输入用户姓名" type="text"/>
-              </div>
-            </div>
           </td>
           <td>
-            <div class="input-container">
-              <div class="input-label">
-                用户姓名:
-              </div>
-              <div class="input-content">
-                <input placeholder="请输入用户姓名" type="text"/>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="input-container">
-              <div class="input-label">
-                用户姓名:
-              </div>
-              <div class="input-content">
-                <input placeholder="请输入用户姓名" type="text"/>
-              </div>
-            </div>
-          </td>
-          <td>
-            <div class="input-container">
-              <div class="input-label">
-                用户姓名:
-              </div>
-              <div class="input-content">
-                <input placeholder="请输入用户姓名" type="text"/>
-              </div>
-            </div>
-          </td>
-          <td>
-            <div class="input-container">
-              <div class="input-label">
-                用户姓名:
-              </div>
-              <div class="input-content">
-                <input placeholder="请输入用户姓名" type="text"/>
-              </div>
-            </div>
-          </td>
-          <td>
-            <div class="input-container">
-              <div class="input-label">
-                用户姓名:
-              </div>
-              <div class="input-content">
-                <input placeholder="请输入用户姓名" type="text"/>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="input-container">
-              <div class="input-label">
-                用户姓名:
-              </div>
-              <div class="input-content">
-                <input placeholder="请输入用户姓名" type="text"/>
-              </div>
-            </div>
-          </td>
-          <td>
-            <div class="input-container">
-              <div class="input-label">
-                用户姓名:
-              </div>
-              <div class="input-content">
-                <input placeholder="请输入用户姓名" type="text"/>
-              </div>
-            </div>
-          </td>
-          <td>
-            <div class="input-container">
-              <div class="input-label">
-                用户姓名:
-              </div>
-              <div class="input-content">
-                <input placeholder="请输入用户姓名" type="text"/>
-              </div>
-            </div>
-          </td>
-          <td>
-            <div class="input-container">
-              <div class="input-label">
-                用户姓名:
-              </div>
-              <div class="input-content">
-                <input placeholder="请输入用户姓名" type="text"/>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="input-container">
-              <div class="input-label">
-                用户姓名:
-              </div>
-              <div class="input-content">
-                <input placeholder="请输入用户姓名" type="text"/>
-              </div>
-            </div>
-          </td>
-          <td>
-            <div class="input-container">
-              <div class="input-label">
-                用户姓名:
-              </div>
-              <div class="input-content">
-                <input placeholder="请输入用户姓名" type="text"/>
-              </div>
-            </div>
-          </td>
-          <td>
-            <div class="input-container">
-              <div class="input-label">
-                用户姓名:
-              </div>
-              <div class="input-content">
-                <input placeholder="请输入用户姓名" type="text"/>
-              </div>
-            </div>
-          </td>
-          <td>
-            <div class="input-container">
-              <div class="input-label">
-                用户姓名:
-              </div>
-              <div class="input-content">
-                <input placeholder="请输入用户姓名" type="text"/>
-              </div>
-            </div>
+            <button class="insert c-green">新增</button>
+            <button class="query c-blue">查询</button>
           </td>
         </tr>
       </tbody>
@@ -186,57 +38,18 @@
     <div class="title">用户权限明细</div>
   </div>
   <div class="table-body">
-    <table class="table-head">
-      <tbody>
-        <tr>
-          <th>表头1</th>
-          <th>表头2</th>
-          <th>表头3</th>
-          <th>表头4</th>
-          <th>表头5</th>
-          <th>表头6</th>
-          <th>表头7</th>
-        </tr>
-      </tbody>
-    </table>
     <div class="table-data">
-      <table border="1">
+      <table border="1" id="roleManagementTable">
+        <thead class="table-head">
+          <tr>
+            <th bind-to="ruleName" style="width: 15%;">角色名称</th>
+            <th style="width: 85%;">操作</th>
+          </tr>
+        </thead>
         <tbody>
           <tr>
             <td>表格数据1</td>
             <td>表格数据2</td>
-            <td>表格数据3</td>
-            <td>表格数据4</td>
-            <td>表格数据5</td>
-            <td>表格数据6</td>
-            <td>表格数据7</td>
-          </tr>
-          <tr>
-            <td>表格数据1</td>
-            <td>表格数据2</td>
-            <td>表格数据3</td>
-            <td>表格数据4</td>
-            <td>表格数据5</td>
-            <td>表格数据6</td>
-            <td>表格数据7</td>
-          </tr>
-          <tr>
-            <td>表格数据1</td>
-            <td>表格数据2</td>
-            <td>表格数据3</td>
-            <td>表格数据4</td>
-            <td>表格数据5</td>
-            <td>表格数据6</td>
-            <td>表格数据7</td>
-          </tr>
-          <tr>
-            <td>表格数据1</td>
-            <td>表格数据2</td>
-            <td>表格数据3</td>
-            <td>表格数据4</td>
-            <td>表格数据5</td>
-            <td>表格数据6</td>
-            <td>表格数据7</td>
           </tr>
         </tbody>
       </table>
@@ -267,20 +80,102 @@
 </div>
 <script>
   (function() {
-    cancelEvent = function() {
+    $.ajax({
+      url: '/roleManagement/show',
+      dataType: "json",
+      type:"post",
+      async: true,
+      data: {
+
+      },
+      success:function (response) {
+        // 初始化页面
+        bindData('#roleManagementTable', response, 'ruleId', true);
+        $('.delete').remove();
+      },
+      error: function(error) {
+      }
+    });
+
+    insertEvent = function() {
 
     };
+
     updateEvent = function() {
 
     };
-    deleteEvent = function() {
 
+    deleteEvent = function() {
+      $.ajax({
+        url: '/roleManagement/delete',
+        dataType: "json",
+        type:"post",
+        async: true,
+        data: data,
+        success:function (response) {
+
+        },
+        error: function(error) {
+
+        }
+      });
     };
+
     queryEvent = function() {
 
     };
 
-    confirmEvent = function() {
+    confirmEvent = function(el) {
+      // 新增操作
+      if (ACTION === 'INSERT') {
+        var data = {};
+        el.find('input, select').each(function() {
+          if ($(this).val()) {
+            data[$(this).attr('bind-to')] = $(this).val();
+          }
+        });
+
+        // 新增车辆信息
+        $.ajax({
+          url: '/roleManagement/add',
+          dataType: "json",
+          type:"post",
+          async: true,
+          data: data,
+          success:function (response) {
+
+          },
+          error: function(error) {
+
+          }
+        });
+
+        // 更新操作
+      } else if (ACTION === 'UPDATE') {
+        var data = {};
+        el.find('input, select').each(function() {
+          if ($(this).val()) {
+            data[$(this).attr('bind-to')] = $(this).val();
+          }
+        });
+
+        // 更新车辆信息
+        $.ajax({
+          url: '/roleManagement/update',
+          dataType: "json",
+          type:"post",
+          async: true,
+          data: data,
+          success:function (response) {
+
+          },
+          error: function(error) {
+
+          }
+        });
+      }
+    };
+    cancelEvent = function() {
 
     };
   })();

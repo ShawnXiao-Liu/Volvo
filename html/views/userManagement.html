@@ -125,23 +125,82 @@
 </div>
 <script>
   (function() {
+    $.ajax({
+      url: '/register/show',
+      dataType: "json",
+      type:"post",
+      async: true,
+      data: {
+        userId: '',
+      },
+      success:function (response) {
+
+      },
+      error: function(error) {
+
+      }
+    });
+    $.ajax({
+      url: '/register/getUserAll',
+      dataType: "json",
+      type:"post",
+      async: true,
+      data: {
+        userId: '',
+      },
+      success:function (response) {
+
+      },
+      error: function(error) {
+
+      }
+    });
     insertEvent = function() {
 
     };
-    cancelEvent = function() {
-
-    };
     updateEvent = function() {
-
+      // 更新方法查询数据/equipmentInfo /getVehicle
     };
+
     deleteEvent = function() {
 
     };
+
     queryEvent = function() {
 
     };
-    confirmEvent = function() {
-      console.log(ACTION);
+
+    confirmEvent = function(el) {
+      // 新增操作
+      if (ACTION === 'INSERT') {
+
+      // 更新操作
+      } else if (ACTION === 'UPDATE') {
+        var data = {};
+        el.find('input, select').each(function() {
+          if ($(this).val()) {
+            data[$(this).attr('bind-to')] = $(this).val();
+          }
+        });
+
+        // 更新车辆信息
+        $.ajax({
+          url: '/register/edit',
+          dataType: "json",
+          type:"post",
+          async: true,
+          data: data,
+          success:function (response) {
+
+          },
+          error: function(error) {
+
+          }
+        });
+      }
+    };
+    cancelEvent = function() {
+
     };
   })();
 </script>
