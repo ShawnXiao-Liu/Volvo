@@ -35,7 +35,7 @@
                 设备类型:
               </div>
               <div class="input-content">
-                <select id="equipmentType" bind-to="equipmentType">
+                <select bind-to="equipmentType">
 
                 </select>
               </div>
@@ -163,20 +163,116 @@
 </div>
 <script>
   (function() {
-    cancelEvent = function() {
+    insertEvent = function() {
+      $('.window-content').find('[bind-to="equipmentId"]').parents('.input-container').show();
 
+      $.ajax({
+        url: '/equipmentInfo/show',
+        dataType: "json",
+        type:"post",
+        async: true,
+        success:function (response) {
+
+        },
+        error: function(error) {
+
+        }
+      });
     };
+
     updateEvent = function() {
+      // 更新方法查询数据/equipmentInfo /show
+      $.ajax({
+        url: '/equipmentInfo/show',
+        dataType: "json",
+        type:"post",
+        async: true,
+        data: {
+          vehicleId: ''
+        },
+        success:function (response) {
+          // 此处更新下拉框
+        },
+        error: function(error) {
 
+        }
+      });
     };
+
     deleteEvent = function() {
+      $.ajax({
+        url: '/equipmentInfo/updateEquipment',
+        dataType: "json",
+        type:"post",
+        async: true,
+        data: {
+          equipmentId: '',
+          status: '1'
+        },
+        success:function (response) {
 
+        },
+        error: function(error) {
+
+        }
+      });
     };
+
     queryEvent = function() {
 
     };
 
-    confirmEvent = function() {
+    confirmEvent = function(el) {
+      // 新增操作
+      if (ACTION === 'INSERT') {
+        var data = {};
+        el.find('input, select').each(function() {
+          if ($(this).val()) {
+            data[$(this).attr('bind-to')] = $(this).val();
+          }
+        });
+
+        // 新增车辆信息
+        $.ajax({
+          url: '/equipmentInfo/addEquipment',
+          dataType: "json",
+          type:"post",
+          async: true,
+          data: data,
+          success:function (response) {
+
+          },
+          error: function(error) {
+
+          }
+        });
+
+        // 更新操作
+      } else if (ACTION === 'UPDATE') {
+        var data = {};
+        el.find('input, select').each(function() {
+          if ($(this).val()) {
+            data[$(this).attr('bind-to')] = $(this).val();
+          }
+        });
+
+        // 更新车辆信息
+        $.ajax({
+          url: '/equipmentInfo/updateEquipment',
+          dataType: "json",
+          type:"post",
+          async: true,
+          data: data,
+          success:function (response) {
+
+          },
+          error: function(error) {
+
+          }
+        });
+      }
+    };
+    cancelEvent = function() {
 
     };
   })();

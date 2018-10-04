@@ -22,10 +22,12 @@
           <td>
             <div class="input-container">
               <div class="input-label">
-                所属工程编号:
+                工程名称:
               </div>
               <div class="input-content">
-                <input bind-to="engineeringId" placeholder="" type="text"/>
+                <select bind-to="engineeringId" placeholder="" type="text">
+
+                </select>
               </div>
             </div>
           </td>
@@ -181,20 +183,106 @@
 </div>
 <script>
   (function() {
-    cancelEvent = function() {
+    $.ajax({
+      url: '/projectManagement/engineeringShow',
+      dataType: "json",
+      type:"post",
+      async: true,
+      data: {
+        userId: '',
+        engineeringId: ''
+      },
+      success:function (response) {
+        // 初始化页面下拉选
+
+      },
+      error: function(error) {
+      }
+    });
+    $.ajax({
+      url: '/projectManagement/partShow',
+      dataType: "json",
+      type:"post",
+      async: true,
+      data: {
+        userId: ''
+      },
+      success:function (response) {
+        // 初始化页面下拉选
+        bindData('#labelManagementTable', response, 'partId', true);
+        $('.delete').remove();
+      },
+      error: function(error) {
+      }
+    });
+
+    insertEvent = function() {
 
     };
+
     updateEvent = function() {
-
+      // 更新方法查询数据/equipmentInfo /show
     };
+
     deleteEvent = function() {
 
     };
+
     queryEvent = function() {
 
     };
 
-    confirmEvent = function() {
+    confirmEvent = function(el) {
+      // 新增操作
+      if (ACTION === 'INSERT') {
+        var data = {};
+        el.find('input, select').each(function() {
+          if ($(this).val()) {
+            data[$(this).attr('bind-to')] = $(this).val();
+          }
+        });
+
+        // 新增车辆信息
+        $.ajax({
+          url: '/equipmentInfo/newPart',
+          dataType: "json",
+          type:"post",
+          async: true,
+          data: data,
+          success:function (response) {
+
+          },
+          error: function(error) {
+
+          }
+        });
+
+        // 更新操作
+      } else if (ACTION === 'UPDATE') {
+        var data = {};
+        el.find('input, select').each(function() {
+          if ($(this).val()) {
+            data[$(this).attr('bind-to')] = $(this).val();
+          }
+        });
+
+        // 更新车辆信息
+        $.ajax({
+          url: '/equipmentInfo/changeEngineering',
+          dataType: "json",
+          type:"post",
+          async: true,
+          data: data,
+          success:function (response) {
+
+          },
+          error: function(error) {
+
+          }
+        });
+      }
+    };
+    cancelEvent = function() {
 
     };
   })();
