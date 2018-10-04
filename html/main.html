@@ -373,6 +373,14 @@
     .user-form button:last-child {
       margin-left: 5%;
     }
+    .user-table .table-data button {
+      height: 100%;
+      width: 30%;
+      font-size: 1em;
+      border-radius: 0.25em;
+      padding: 0.2em 0;
+      color: #333333;
+    }
     .btn-act {
       opacity: 0.6;
     }
@@ -580,12 +588,30 @@
 
                  $('.confirm').on('click', function() {
                    $('.window-mask').fadeOut(200).find('.window-content').html('');
-                   confirmEvent();
+                   confirmEvent(this);
                  });
 
                  $('.cancel').on('click', function() {
                    $('.window-mask').fadeOut(200).find('.window-content').html('');
-                   cancelEvent();
+                   cancelEvent(this);
+                 });
+               });
+
+               // update按键自带属性
+               $('.update').on('click', function() {
+                 $('.window-mask').fadeIn(200);
+                 $('.window-content').html('<div class="user-form">' +  $('.user-form').html() + '</div>' ).find('button').remove();
+                 var formHeight = $('.window-content').find('.user-form').height();
+                 $('.window-content').height(formHeight + 64).append('<button class="confirm c-confirm" style="left:34.5%">确认</button><button class="cancel c-cancel" style="left:50.5%">取消</button>');
+
+                 $('.confirm').on('click', function() {
+                   $('.window-mask').fadeOut(200).find('.window-content').html('');
+                   confirmEvent(this);
+                 });
+
+                 $('.cancel').on('click', function() {
+                   $('.window-mask').fadeOut(200).find('.window-content').html('');
+                   cancelEvent(this);
                  });
                });
 
@@ -598,9 +624,13 @@
                    if (value)
                      dataObj[param] = value;
                  });
-
-                 queryEvent();
+                 queryEvent(this);
                });
+
+               $('.delete').on('click', function() {
+                 deleteEvent(this);
+               });
+
              });
          } else {
              if ($(this).parent().hasClass('menu-active')) {
@@ -639,7 +669,11 @@
         trHtml += '<td>' + d[pam] + '</td>'
       });
       if (hasControl) {
-        trHtml += '<td>删除/修改</td></tr>'
+        trHtml += '  <td>' +
+          '            <button class="update c-green">修改</button>' +
+          '            <button class="delete c-delete">删除</button>' +
+          '          </td>' +
+          '        </tr>'
       } else {
         trHtml += '</tr>'
       }
