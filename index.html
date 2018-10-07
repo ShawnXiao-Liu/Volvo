@@ -114,7 +114,9 @@
                     pwd: pwd
                 },
                 success:function (response) {
-                    console.log(response);
+                    var userId = response.userId;
+                    window.sessionStorage.setItem('USER_ID', userId);
+
                     window.location.href = 'html/main.html';
                 },
                 error: function(error) {
@@ -123,7 +125,7 @@
             });
         });
 
-        $('[bind-to="account"]').on('blur', function() {
+        $('[bind-to="account"]').on('change', function() {
             var account = $(this).val();
             $.ajax({
                 url: '/register/checkAccount',
@@ -178,12 +180,17 @@
             addErrorTips($('#pwdCheck').parents('.common-input'), '请再次确认密码正确');
             return false;
         }
+        console.log({
+          "user": JSON.stringify([dataMap])
+        });
         $.ajax({
             url: '/register/add',
             dataType: "json",
             type:"post",
             async: true,
-            data: dataMap,
+            data: {
+              "user": JSON.stringify([dataMap])
+            },
             success:function (response) {
                 console.log(response);
                 alert('success');
