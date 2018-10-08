@@ -168,8 +168,10 @@
         type:"post",
         async: true,
         data: {
-          vehicleId: '',
-          status: '1'
+            "vehicle": JSON.stringify([{
+                vehicleId: '',
+                status: '1'
+            }])
         },
         success:function (response) {
 
@@ -200,7 +202,9 @@
           dataType: "json",
           type:"post",
           async: true,
-          data: data,
+          data: {
+              "vehicle": JSON.stringify([data])
+          },
           success:function (response) {
 
           },
@@ -224,7 +228,9 @@
           dataType: "json",
           type:"post",
           async: true,
-          data: data,
+          data: {
+              "vehicle": JSON.stringify([data])
+          },
           success:function (response) {
 
           },

@@ -111,7 +111,12 @@
         dataType: "json",
         type:"post",
         async: true,
-        data: data,
+        data: {
+            "rule": JSON.stringify([{
+                ruleId: '',
+                ruleName: '1'
+            }])
+        },
         success:function (response) {
 
         },
@@ -141,7 +146,9 @@
           dataType: "json",
           type:"post",
           async: true,
-          data: data,
+          data: {
+              "rule": JSON.stringify([data])
+          },
           success:function (response) {
 
           },
@@ -165,7 +172,9 @@
           dataType: "json",
           type:"post",
           async: true,
-          data: data,
+          data: {
+              "rule": JSON.stringify([data])
+          },
           success:function (response) {
 
           },

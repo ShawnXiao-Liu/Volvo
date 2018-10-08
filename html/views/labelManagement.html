@@ -248,7 +248,9 @@
           dataType: "json",
           type:"post",
           async: true,
-          data: data,
+          data: {
+              "part": JSON.stringify([data])
+          },
           success:function (response) {
 
           },
@@ -272,7 +274,9 @@
           dataType: "json",
           type:"post",
           async: true,
-          data: data,
+          data: {
+              "part": JSON.stringify([data])
+          },
           success:function (response) {
 
           },

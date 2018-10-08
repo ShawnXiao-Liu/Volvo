@@ -521,150 +521,169 @@
   }
 
   $(document).ready(function() {
-      $('.page-container').height($(window).height() - $('.nav-bar').height());
+      $.ajax({
+          url: '/login/getMenu',
+          dataType: "json",
+          type:"post",
+          async: false,
+          data: {
+              userId: window.sessionStorage.getItem('USER_ID')
+          },
+          success:function (response) {
+              console.log(response);
+              onMenuLoad();
+          },
+          error: function(error) {
 
-      $('.menu-item').on('click', function() {
+          }
+      });
 
-           // 跳转方法
-           if ($(this).attr('nav-to')) {
-               cleanEvent();
-               var menuClicked = $(this).html().trim();
-               var route = $(this).attr('nav-to');
-               var curHtml = $(this).html().trim();
-               $('.tag').removeClass('tag-active');
-               $('.tag').each(function() {
-                  if ($(this).find('.tag-name').html().trim() === curHtml) {
-                    $(this).addClass('tag-active');
+      function onMenuLoad() {
+          $('.page-container').height($(window).height() - $('.nav-bar').height());
+
+          $('.menu-item').on('click', function() {
+
+              // 跳转方法
+              if ($(this).attr('nav-to')) {
+                  cleanEvent();
+                  var menuClicked = $(this).html().trim();
+                  var route = $(this).attr('nav-to');
+                  var curHtml = $(this).html().trim();
+                  $('.tag').removeClass('tag-active');
+                  $('.tag').each(function() {
+                      if ($(this).find('.tag-name').html().trim() === curHtml) {
+                          $(this).addClass('tag-active');
+                      }
+                  });
+
+
+                  if ( !$(this).parent().hasClass('menu-active') ) {
+                      $(this).parent().addClass('menu-active')
+                      $('.tag-container').append( Tag(menuClicked) );
+                      $('.tag-close').off().on('click', function(event) {
+                          event.stopPropagation();
+                          $(this).parents('.tag').fadeOut(100, function() {
+                              var tag2close = $(this);
+                              $('.menu-active').each(function() {
+                                  if ($(this).find('.menu-item').html().trim() ===
+                                      tag2close.find('.tag-name').html().trim()) {
+
+                                      $(this).removeClass('menu-active');
+                                      tag2close.fadeOut(100, function() {
+                                          tag2close.remove();
+                                          if ( $('.tag-active').length === 0 ) {
+                                              $('.tag').eq(0).click();
+                                              if ($('.tag').eq(0).length === 0)
+                                                  $('.page-content').html('');
+                                          }
+                                      });
+                                  }
+                              });
+                          })
+                      });
+
+                      $('.tag').off().on('click', function() {
+                          cleanEvent();
+                          $('.tag').removeClass('tag-active');
+                          var tagClicked = $(this).addClass('tag-active');
+                          $('.menu-active').each(function() {
+                              if ($(this).find('.menu-item').html().trim() === tagClicked.find('.tag-name').html().trim()) {
+                                  $(this).find('.menu-item').trigger('click');
+                              }
+                          });
+                      });
                   }
-               });
+                  $('.page-content').load('views/' + route + '.html', function() {
 
+                      // 初始化表格高度
+                      $('.table-head').width($('.table-data').find('table').width() + 2);
+                      $('.table-body').height($('.page-content').height() - $('.user-form').height() - $('.table-title').height() - 36);
+                      $('.table-data').height($('.table-body').height() - $('.table-title').height() - $('.table-footer').height());
 
-               if ( !$(this).parent().hasClass('menu-active') ) {
-                   $(this).parent().addClass('menu-active')
-                   $('.tag-container').append( Tag(menuClicked) );
-                   $('.tag-close').off().on('click', function(event) {
-                       event.stopPropagation();
-                       $(this).parents('.tag').fadeOut(100, function() {
-                           var tag2close = $(this);
-                           $('.menu-active').each(function() {
-                               if ($(this).find('.menu-item').html().trim() ===
-                                 tag2close.find('.tag-name').html().trim()) {
+                      // 全局button设置点击事件
+                      $('button').off('mousedown').on('mousedown', function() {
+                          $(this).addClass('btn-act');
+                      });
+                      $('button').off('mouseup').on('mouseup', function() {
+                          $(this).removeClass('btn-act');
+                      });
 
-                                   $(this).removeClass('menu-active');
-                                   tag2close.fadeOut(100, function() {
-                                       tag2close.remove();
-                                       if ( $('.tag-active').length === 0 ) {
-                                         $('.tag').eq(0).click();
-                                         if ($('.tag').eq(0).length === 0)
-                                           $('.page-content').html('');
-                                       }
-                                   });
-                               }
-                           });
-                       })
-                   });
+                      // insert按键自带属性。
+                      $('.insert').on('click', function() {
+                          ACTION = 'INSERT';
+                          $('.window-mask').fadeIn(200);
+                          $('.window-content').html('<div class="user-form">' +  $('.user-form').html() + '</div>' ).find('button').remove();
+                          var formHeight = $('.window-content').find('.user-form').height();
+                          $('.window-content').height(formHeight + 64).append('<button class="confirm c-confirm" style="left:34.5%">确认</button><button class="cancel c-cancel" style="left:50.5%">取消</button>');
+                          $('.confirm').on('click', function() {
+                              confirmEvent($('.window-content').find('.user-form'));
 
-                   $('.tag').off().on('click', function() {
-                     cleanEvent();
-                     $('.tag').removeClass('tag-active');
-                     var tagClicked = $(this).addClass('tag-active');
-                     $('.menu-active').each(function() {
-                       if ($(this).find('.menu-item').html().trim() === tagClicked.find('.tag-name').html().trim()) {
-                         $(this).find('.menu-item').trigger('click');
-                       }
-                     });
-                   });
-               }
-               $('.page-content').load('views/' + route + '.html', function() {
+                              $('.window-mask').fadeOut(200).find('.window-content').html('');
+                          });
 
-                 // 初始化表格高度
-                 $('.table-head').width($('.table-data').find('table').width() + 2);
-                 $('.table-body').height($('.page-content').height() - $('.user-form').height() - $('.table-title').height() - 36);
-                 $('.table-data').height($('.table-body').height() - $('.table-title').height() - $('.table-footer').height());
+                          $('.cancel').on('click', function() {
+                              cancelEvent($('.window-content').find('.user-form'));
 
-                 // 全局button设置点击事件
-                 $('button').off('mousedown').on('mousedown', function() {
-                   $(this).addClass('btn-act');
-                 });
-                 $('button').off('mouseup').on('mouseup', function() {
-                   $(this).removeClass('btn-act');
-                 });
+                              $('.window-mask').fadeOut(200).find('.window-content').html('');
+                          });
 
-                 // insert按键自带属性。
-                 $('.insert').on('click', function() {
-                   ACTION = 'INSERT';
-                   $('.window-mask').fadeIn(200);
-                   $('.window-content').html('<div class="user-form">' +  $('.user-form').html() + '</div>' ).find('button').remove();
-                   var formHeight = $('.window-content').find('.user-form').height();
-                   $('.window-content').height(formHeight + 64).append('<button class="confirm c-confirm" style="left:34.5%">确认</button><button class="cancel c-cancel" style="left:50.5%">取消</button>');
-                   $('.confirm').on('click', function() {
-                     confirmEvent($('.window-content').find('.user-form'));
+                          insertEvent($('.window-content').find('.user-form'));
+                      });
 
-                     $('.window-mask').fadeOut(200).find('.window-content').html('');
-                   });
+                      // update按键自带属性
+                      $('.update').on('click', function() {
+                          ACTION = 'UPDATE';
+                          $('.window-mask').fadeIn(200);
+                          $('.window-content').html('<div class="user-form">' +  $('.user-form').html() + '</div>' ).find('button').remove();
+                          var formHeight = $('.window-content').find('.user-form').height();
+                          $('.window-content').height(formHeight + 64).append('<button class="confirm c-confirm" style="left:34.5%">确认</button><button class="cancel c-cancel" style="left:50.5%">取消</button>');
 
-                   $('.cancel').on('click', function() {
-                     cancelEvent($('.window-content').find('.user-form'));
+                          $('.confirm').on('click', function() {
+                              confirmEvent($('.window-content').find('.user-form'));
 
-                     $('.window-mask').fadeOut(200).find('.window-content').html('');
-                   });
+                              $('.window-mask').fadeOut(200).find('.window-content').html('');
+                          });
 
-                   insertEvent($('.window-content').find('.user-form'));
-                 });
+                          $('.cancel').on('click', function() {
+                              cancelEvent($('.window-content').find('.user-form'));
 
-                 // update按键自带属性
-                 $('.update').on('click', function() {
-                   ACTION = 'UPDATE';
-                   $('.window-mask').fadeIn(200);
-                   $('.window-content').html('<div class="user-form">' +  $('.user-form').html() + '</div>' ).find('button').remove();
-                   var formHeight = $('.window-content').find('.user-form').height();
-                   $('.window-content').height(formHeight + 64).append('<button class="confirm c-confirm" style="left:34.5%">确认</button><button class="cancel c-cancel" style="left:50.5%">取消</button>');
+                              $('.window-mask').fadeOut(200).find('.window-content').html('');
+                          });
+                          updateEvent($('.window-content').find('.user-form'));
+                      });
 
-                   $('.confirm').on('click', function() {
-                     confirmEvent($('.window-content').find('.user-form'));
+                      // query按键自带属性
+                      $('.query').on('click', function() {
+                          var dataObj = {};
+                          $('.user-form').find("input[bind-to]").each(function() {
+                              var param = $(this).attr('bind-to');
+                              var value = $(this).val();
+                              if (value)
+                                  dataObj[param] = value;
+                          });
+                          queryEvent(this);
+                      });
 
-                     $('.window-mask').fadeOut(200).find('.window-content').html('');
-                   });
+                      $('.delete').on('click', function() {
+                          deleteEvent(this);
+                      });
 
-                   $('.cancel').on('click', function() {
-                     cancelEvent($('.window-content').find('.user-form'));
+                  });
+              } else {
+                  if ($(this).parent().hasClass('menu-active')) {
+                      $(this).parent().removeClass('menu-active').find('ul').stop().slideUp(200);
+                  } else {
+                      $(this).parent().addClass('menu-active').find('ul').stop().slideDown(200);
+                  }
+              }
+          });
 
-                     $('.window-mask').fadeOut(200).find('.window-content').html('');
-                   });
-                   updateEvent($('.window-content').find('.user-form'));
-                 });
+          $(".menu-item[nav-to='carManagement']").click();
 
-                 // query按键自带属性
-                 $('.query').on('click', function() {
-                   var dataObj = {};
-                   $('.user-form').find("input[bind-to]").each(function() {
-                     var param = $(this).attr('bind-to');
-                     var value = $(this).val();
-                     if (value)
-                       dataObj[param] = value;
-                   });
-                   queryEvent(this);
-                 });
-
-                 $('.delete').on('click', function() {
-                   deleteEvent(this);
-                 });
-
-               });
-           } else {
-               if ($(this).parent().hasClass('menu-active')) {
-                  $(this).parent().removeClass('menu-active').find('ul').stop().slideUp(200);
-               } else {
-                  $(this).parent().addClass('menu-active').find('ul').stop().slideDown(200);
-               }
-           }
-      });
-
-      $(".menu-item[nav-to='carManagement']").click();
-
-      $('#closeMask').on('click', function() {
-        $('.window-mask').fadeOut(200).find('.window-content').html('');
-      });
+          $('#closeMask').on('click', function() {
+              $('.window-mask').fadeOut(200).find('.window-content').html('');
+          });
+      }
   });
 
   var Tag = function(tagName) {

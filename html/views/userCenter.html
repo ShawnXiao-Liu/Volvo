@@ -139,11 +139,13 @@
         }
         console.log(dataMap);
         $.ajax({
-            url: '/register /edit',
+            url: '/register/edit',
             dataType: "json",
             type:"post",
             async: true,
-            data: dataMap,
+            data: {
+              "user": JSON.stringify([data])
+            },
             success:function (response) {
                 console.log(response);
             },

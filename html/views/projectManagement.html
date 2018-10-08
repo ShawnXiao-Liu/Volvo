@@ -182,7 +182,9 @@
           dataType: "json",
           type:"post",
           async: true,
-          data: data,
+          data: {
+              "engineering": JSON.stringify([data])
+          },
           success:function (response) {
 
           },
@@ -206,7 +208,9 @@
           dataType: "json",
           type:"post",
           async: true,
-          data: data,
+          data: {
+              "engineering": JSON.stringify([data])
+          },
           success:function (response) {
 
           },

@@ -155,6 +155,7 @@
 
       }
     });
+
     insertEvent = function() {
 
     };
@@ -183,13 +184,15 @@
           }
         });
 
-        // 更新车辆信息
+        // 更新用户信息
         $.ajax({
           url: '/register/edit',
           dataType: "json",
           type:"post",
           async: true,
-          data: data,
+          data: {
+              "user": JSON.stringify([data])
+          },
           success:function (response) {
 
           },
