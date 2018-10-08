@@ -1,0 +1,172 @@
+<div class="user-form">
+  <div class="form-title">
+    <div class="blue-block"></div>
+    <div class="title">
+      个人中心
+    </div>
+  </div>
+  <div class="form-body" style="border: 0">
+    <table>
+      <tbody>
+      <tr>
+        <td>
+          <div class="input-container">
+            <div class="input-label">
+              用户账号:
+            </div>
+            <div class="input-content">
+              <input disabled placeholder="" type="text"/>
+            </div>
+          </div>
+        </td>
+        <td></td><td></td><td></td>
+      </tr>
+      <tr>
+        <td>
+          <div class="input-container">
+            <div class="input-label">
+              用户角色:
+            </div>
+            <div class="input-content">
+              <input disabled placeholder="" type="text"/>
+            </div>
+          </div>
+        </td>
+        <td></td><td></td><td></td>
+      </tr>
+      <tr>
+        <td>
+          <div class="input-container">
+            <div class="input-label">
+              用户姓名:
+            </div>
+            <div class="input-content">
+              <input id="name" placeholder="" type="text"/>
+            </div>
+          </div>
+        </td>
+        <td></td><td></td><td></td>
+      </tr>
+      <tr>
+        <td>
+          <div class="input-container">
+            <div class="input-label">
+              绑定手机号:
+            </div>
+            <div class="input-content">
+              <input id="tel" placeholder="" type="text"/>
+            </div>
+          </div>
+        </td>
+        <td></td><td></td><td></td>
+      </tr>
+      <tr class="new-pwd" style="display: none">
+        <td>
+          <div class="input-container">
+            <div class="input-label">
+              新密码:
+            </div>
+            <div class="input-content">
+              <input id="pwd" placeholder="请输入新密码" type="password"/>
+            </div>
+          </div>
+        </td>
+        <td></td><td></td><td></td>
+      </tr>
+      <tr class="new-pwd" style="display: none">
+        <td>
+          <div class="input-container">
+            <div class="input-label">
+              确认密码:
+            </div>
+            <div class="input-content">
+              <input id="pwdCheck" placeholder="请再次输入新密码" type="password"/>
+            </div>
+          </div>
+        </td>
+        <td></td><td></td><td></td>
+      </tr>
+      <tr>
+        <td>
+          <button class="update_info c-green">确认修改</button>
+          <button class="update_pwd c-blue">修改密码</button>
+        </td>
+        <td></td><td></td><td></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<script>
+(function() {
+    $('.update_pwd').on('click', function() {
+        if ( $(this).hasClass('cancel-modify') ) {
+            $('.new-pwd').hide();
+            $(this).removeClass('cancel-modify').html('修改密码');
+        } else {
+            $('.new-pwd').show();
+            $(this).addClass('cancel-modify').html('取消修改');
+        }
+    });
+
+    $('.update_info').on('click', function() {
+        var dataMap = {};
+        var name = $('#name').val();
+        var tel = $('#tel').val();
+        if (name !== ""){
+            dataMap['name'] = name;
+        } else {
+            alert('用户姓名不能为空！')
+        }
+        if( (/^1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8}$/.test(tel)) && tel.length === 11 && tel !== ""){
+            dataMap['tel'] = tel;
+        } else {
+            alert('请填写正确的手机号码！')
+        }
+        if ( $('.cancel-modify').length ) {
+            var pwd = $('#pwd').val();
+            if (pwd.length >= 6 && pwd.length <= 16) {
+                if ( pwd === $('#pwdCheck').val()) {
+                    dataMap['pwd'] = pwd;
+                } else {
+                    alert('请确认密码是否输入正确');
+                    return false;
+                }
+            } else {
+                alert('新密码应为6到16位的字符');
+                return false;
+            }
+        }
+        console.log(dataMap);
+        $.ajax({
+            url: '/register /edit',
+            dataType: "json",
+            type:"post",
+            async: true,
+            data: dataMap,
+            success:function (response) {
+                console.log(response);
+            },
+            error: function(error) {
+
+            }
+        });
+    });
+    /* 初始化select码表 */
+   $.ajax({
+        url: '/register/userInfo',
+        dataType: "json",
+        type:"post",
+        async: true,
+        data: {
+            userId: userId
+        },
+        success:function (response) {
+            console.log(response);
+        },
+        error: function(error) {
+
+        }
+    });
+})();
+</script>
