@@ -531,6 +531,15 @@
           },
           success:function (response) {
               console.log(response);
+              var menuHtml = '';
+              for (var i = 0; i < response.length; i ++) {
+                  menuHtml += '<li>\
+                                <div class="menu-item pointer" nav-to="' + response[i].menuPath + '">\
+                                  ' + response[i].menuName + '\
+                                </div>\
+                              </li>'
+              }
+              $('.menu-lv1').html(menuHtml);
               onMenuLoad();
           },
           error: function(error) {
@@ -558,7 +567,7 @@
 
 
                   if ( !$(this).parent().hasClass('menu-active') ) {
-                      $(this).parent().addClass('menu-active')
+                      $(this).parent().addClass('menu-active');
                       $('.tag-container').append( Tag(menuClicked) );
                       $('.tag-close').off().on('click', function(event) {
                           event.stopPropagation();
@@ -677,6 +686,7 @@
                   }
               }
           });
+          console.log('<===== 成功执行menuOnload事件 =====>')
 
           $(".menu-item[nav-to='carManagement']").click();
 
