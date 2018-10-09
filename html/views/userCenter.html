@@ -161,7 +161,7 @@
         type:"post",
         async: true,
         data: {
-            userId: userId
+            "userId": window.sessionStorage.getItem('USER_ID')
         },
         success:function (response) {
             console.log(response);
