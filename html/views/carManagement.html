@@ -126,23 +126,45 @@
 </div>
 <script>
   (function() {
+    $.ajax({
+      url: '/equipmentInfo/getVehicle',
+      dataType: "json",
+      type:"post",
+      async: true,
+      data: {
+        'userId': window.sessionStorage.getItem('USER_ID')
+      },
+      success:function (response) {
+        // 初始化页面
+        bindData('#carManagementTable', response, 'vehicleId', true);
+      },
+      error: function(error) {
+
+      }
+    });
+    $.ajax({
+      url: '/equipmentInfo/getAllEquipmentInfo',
+      dataType: "json",
+      type:"post",
+      async: true,
+      success:function (response) {
+        var optStr = "";
+        for (var i = 0; i < response.length; i ++) {
+          optStr += '<option value="' + response[i].equipmentId + '">' + response[i].equipmentName + '</option>'
+        }
+        $('[bind-to="equipmentId"]').html(optStr);
+      },
+      error: function(error) {
+
+      }
+    });
+
     insertEvent = function() {
       $('.window-content').find('[bind-to="equipmentId"]').parents('.input-container').show();
-
-      $.ajax({
-        url: '/equipmentInfo/getAllEquipmentInfo',
-        dataType: "json",
-        type:"post",
-        async: true,
-        success:function (response) {
-
-        },
-        error: function(error) {
-
-        }
-      });
     };
-    updateEvent = function() {
+
+    updateEvent = function(el) {
+      var vehicleId = $(el).parents('tr').attr('p-key');
       // 更新方法查询数据/equipmentInfo /getVehicle
       $.ajax({
         url: '/equipmentInfo/getVehicle',
@@ -150,10 +172,15 @@
         type:"post",
         async: true,
         data: {
-          vehicleId: ''
+          'userId': window.sessionStorage.getItem('USER_ID'),
+          'vehicleId': vehicleId
         },
         success:function (response) {
-
+          var updateForm = $('.window-content').find('.user-form');
+          updateForm.find('[bind-to]').each(function() {
+            var pam = $(this).attr('bind-to');
+            $(this).val( response[pam] );
+          });
         },
         error: function(error) {
 
@@ -161,16 +188,18 @@
       });
     };
 
-    deleteEvent = function() {
+    deleteEvent = function(el) {
+      var vehicleId = $(el).parents('tr').attr('p-key');
       $.ajax({
         url: '/equipmentInfo/updateVehicle',
         dataType: "json",
         type:"post",
         async: true,
         data: {
+            'userId': window.sessionStorage.getItem('USER_ID'),
             "vehicle": JSON.stringify([{
-                vehicleId: '',
-                status: '1'
+                'vehicleId': vehicleId,
+                'status': '1'
             }])
         },
         success:function (response) {
@@ -203,6 +232,7 @@
           type:"post",
           async: true,
           data: {
+              'userId': window.sessionStorage.getItem('USER_ID'),
               "vehicle": JSON.stringify([data])
           },
           success:function (response) {
@@ -229,7 +259,8 @@
           type:"post",
           async: true,
           data: {
-              "vehicle": JSON.stringify([data])
+            'userId': window.sessionStorage.getItem('USER_ID'),
+            "vehicle": JSON.stringify([data])
           },
           success:function (response) {
 

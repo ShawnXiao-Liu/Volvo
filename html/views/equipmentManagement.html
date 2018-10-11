@@ -163,24 +163,49 @@
 </div>
 <script>
   (function() {
-    insertEvent = function() {
-      $('.window-content').find('[bind-to="equipmentId"]').parents('.input-container').show();
-
-      $.ajax({
-        url: '/equipmentInfo/show',
-        dataType: "json",
-        type:"post",
-        async: true,
-        success:function (response) {
-
-        },
-        error: function(error) {
-
+    $.ajax({
+      url: '/equipmentInfo/show',
+      dataType: "json",
+      type:"post",
+      async: true,
+      data: {
+        'userId': window.sessionStorage.getItem('USER_ID')
+      },
+      success:function (response) {
+        // 初始化页面下拉选
+        var optStr = "";
+        for (var i = 0; i < response.length; i ++) {
+          optStr += '<option value="' + response[i].typeId + '">' + response[i].typeName + '</option>'
         }
-      });
+        $('[bind-to="equipmentType"]').html(optStr);
+      },
+      error: function(error) {
+
+      }
+    });
+    $.ajax({
+      url: '/equipmentInfo/getAllEquipmentInfo',
+      dataType: "json",
+      type:"post",
+      async: true,
+      data: {
+        'userId': window.sessionStorage.getItem('USER_ID')
+      },
+      success:function (response) {
+        // 绑定表单数据
+        bindData('#equipmentManagementTable', response, 'equipmentId', true);
+      },
+      error: function(error) {
+
+      }
+    });
+
+    insertEvent = function() {
+
     };
 
-    updateEvent = function() {
+    updateEvent = function(el) {
+      var equipmentId = $(el).parents('tr').attr('p-key');
       // 更新方法查询数据/equipmentInfo /show
       $.ajax({
         url: '/equipmentInfo/show',
@@ -188,10 +213,15 @@
         type:"post",
         async: true,
         data: {
-          vehicleId: ''
+          'userId': window.sessionStorage.getItem('USER_ID'),
+          'equipmentId': equipmentId
         },
         success:function (response) {
-          // 此处更新下拉框
+          var updateForm = $('.window-content').find('.user-form');
+          updateForm.find('[bind-to]').each(function() {
+            var pam = $(this).attr('bind-to');
+            $(this).val( response[pam] );
+          });
         },
         error: function(error) {
 
@@ -200,16 +230,18 @@
     };
 
     deleteEvent = function() {
+      var equipmentId = $(el).parents('tr').attr('p-key');
       $.ajax({
         url: '/equipmentInfo/updateEquipment',
         dataType: "json",
         type:"post",
         async: true,
         data: {
-            "equipment": JSON.stringify([{
-                equipmentId: '',
-                status: '1'
-            }])
+          'userId': window.sessionStorage.getItem('USER_ID'),
+          "equipment": JSON.stringify([{
+              'equipmentId': equipmentId,
+              'status': '1'
+          }])
         },
         success:function (response) {
 
@@ -241,7 +273,8 @@
           type:"post",
           async: true,
           data: {
-              "equipment": JSON.stringify([data])
+            'userId': window.sessionStorage.getItem('USER_ID'),
+            "equipment": JSON.stringify([data])
           },
           success:function (response) {
 
@@ -267,7 +300,8 @@
           type:"post",
           async: true,
           data: {
-              "equipment": JSON.stringify([data])
+            'userId': window.sessionStorage.getItem('USER_ID'),
+            "equipment": JSON.stringify([data])
           },
           success:function (response) {
 

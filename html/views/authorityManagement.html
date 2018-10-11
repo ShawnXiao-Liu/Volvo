@@ -86,12 +86,11 @@
       type:"post",
       async: true,
       data: {
-
+        'userId': window.sessionStorage.getItem('USER_ID')
       },
       success:function (response) {
         // 初始化页面
         bindData('#roleManagementTable', response, 'ruleId', true);
-        $('.delete').remove();
       },
       error: function(error) {
       }
@@ -102,20 +101,41 @@
     };
 
     updateEvent = function() {
-
+      var ruleId = $(el).parents('tr').attr('p-key');
+      $.ajax({
+        url: '/roleManagement/show',
+        dataType: "json",
+        type:"post",
+        async: true,
+        data: {
+          'userId': window.sessionStorage.getItem('USER_ID'),
+          'ruleId': ruleId
+        },
+        success:function (response) {
+          var updateForm = $('.window-content').find('.user-form');
+          updateForm.find('[bind-to]').each(function() {
+            var pam = $(this).attr('bind-to');
+            $(this).val( response[pam] );
+          });
+        },
+        error: function(error) {
+        }
+      });
     };
 
     deleteEvent = function() {
+      var ruleId = $(el).parents('tr').attr('p-key');
       $.ajax({
         url: '/roleManagement/delete',
         dataType: "json",
         type:"post",
         async: true,
         data: {
-            "rule": JSON.stringify([{
-                ruleId: '',
-                ruleName: '1'
-            }])
+          'userId': window.sessionStorage.getItem('USER_ID'),
+          "rule": JSON.stringify([{
+              'ruleId': ruleId,
+              'ruleName': '1'
+          }])
         },
         success:function (response) {
 
@@ -147,7 +167,8 @@
           type:"post",
           async: true,
           data: {
-              "rule": JSON.stringify([data])
+            'userId': window.sessionStorage.getItem('USER_ID'),
+            "rule": JSON.stringify([data])
           },
           success:function (response) {
 
@@ -173,7 +194,8 @@
           type:"post",
           async: true,
           data: {
-              "rule": JSON.stringify([data])
+            'userId': window.sessionStorage.getItem('USER_ID'),
+            "rule": JSON.stringify([data])
           },
           success:function (response) {
 

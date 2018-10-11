@@ -125,11 +125,11 @@
       type:"post",
       async: true,
       data: {
-        engineeringId: ''
+        userId: window.sessionStorage.getItem('USER_ID')
       },
       success:function (response) {
         // 初始化页面
-        bindData('#projectManagementTable', response, 'engineeringId', true);
+        bindData('#projectManagementTable', response, 'engineeringId');
         $('.delete').remove();
       },
       error: function(error) {
@@ -140,20 +140,25 @@
 
     };
 
-    updateEvent = function() {
+    updateEvent = function(el) {
+      var engineeringId = $(el).parents('tr').attr('p-key');
       $.ajax({
         url: '/projectManagement/engineeringShow',
         dataType: "json",
         type:"post",
         async: true,
         data: {
-          engineeringId: ''
+          'userId': window.sessionStorage.getItem('USER_ID'),
+          'engineeringId': engineeringId
         },
         success:function (response) {
-          // 此处更新下拉框
+          var updateForm = $('.window-content').find('.user-form');
+          updateForm.find('[bind-to]').each(function() {
+            var pam = $(this).attr('bind-to');
+            $(this).val( response[pam] );
+          });
         },
         error: function(error) {
-
         }
       });
     };
@@ -209,6 +214,7 @@
           type:"post",
           async: true,
           data: {
+              "userId": window.sessionStorage.getItem('USER_ID'),
               "engineering": JSON.stringify([data])
           },
           success:function (response) {

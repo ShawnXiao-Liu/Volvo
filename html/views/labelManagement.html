@@ -194,23 +194,27 @@
       },
       success:function (response) {
         // 初始化页面下拉选
-
+        var optStr = "";
+        for (var i = 0; i < response.length; i ++) {
+          optStr += '<option value="' + response[i].engineeringId + '">' + response[i].engineeringName + '</option>'
+        }
+        $('[bind-to="engineeringId"]').html(optStr);
       },
       error: function(error) {
       }
     });
+
     $.ajax({
       url: '/projectManagement/partShow',
       dataType: "json",
       type:"post",
       async: true,
       data: {
-        userId: ''
+        'userId': window.sessionStorage.getItem('USER_ID')
       },
       success:function (response) {
         // 初始化页面下拉选
         bindData('#labelManagementTable', response, 'partId', true);
-        $('.delete').remove();
       },
       error: function(error) {
       }
@@ -221,7 +225,27 @@
     };
 
     updateEvent = function() {
-      // 更新方法查询数据/equipmentInfo /show
+      var labelId = $(el).parents('tr').attr('p-key');
+      // 更新方法查询数据/projectManagement /partShow
+      $.ajax({
+        url: '/projectManagement/partShow',
+        dataType: "json",
+        type:"post",
+        async: true,
+        data: {
+          'userId': window.sessionStorage.getItem('USER_ID'),
+          'labelId': labelId
+        },
+        success:function (response) {
+          var updateForm = $('.window-content').find('.user-form');
+          updateForm.find('[bind-to]').each(function() {
+            var pam = $(this).attr('bind-to');
+            $(this).val( response[pam] );
+          });
+        },
+        error: function(error) {
+        }
+      });
     };
 
     deleteEvent = function() {
@@ -249,7 +273,8 @@
           type:"post",
           async: true,
           data: {
-              "part": JSON.stringify([data])
+            'userId': window.sessionStorage.getItem('USER_ID'),
+            "part": JSON.stringify([data])
           },
           success:function (response) {
 
@@ -275,7 +300,8 @@
           type:"post",
           async: true,
           data: {
-              "part": JSON.stringify([data])
+            'userId': window.sessionStorage.getItem('USER_ID'),
+            "part": JSON.stringify([data])
           },
           success:function (response) {
 

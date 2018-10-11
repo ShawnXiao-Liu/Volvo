@@ -45,7 +45,9 @@
               用户角色:
             </div>
             <div class="input-content">
-              <input bind-to="ruleName" placeholder="" type="text"/>
+              <select bind-to="ruleId" placeholder="" type="text">
+
+              </select>
             </div>
           </div>
         </td>
@@ -131,10 +133,15 @@
       type:"post",
       async: true,
       data: {
-        userId: '',
+        'userId': window.sessionStorage.getItem('USER_ID')
       },
       success:function (response) {
-
+        // 初始化页面下拉选
+        var optStr = "";
+        for (var i = 0; i < response.length; i ++) {
+          optStr += '<option value="' + response[i].ruleId + '">' + response[i].ruleName + '</option>'
+        }
+        $('[bind-to="equipmentType"]').html(optStr);
       },
       error: function(error) {
 
@@ -146,10 +153,11 @@
       type:"post",
       async: true,
       data: {
-        userId: '',
+        'userId': window.sessionStorage.getItem('USER_ID')
       },
       success:function (response) {
-
+        // 绑定表单数据
+        bindData('#userManagementTable', response, 'equipmentId');
       },
       error: function(error) {
 
@@ -172,35 +180,7 @@
     };
 
     confirmEvent = function(el) {
-      // 新增操作
-      if (ACTION === 'INSERT') {
 
-      // 更新操作
-      } else if (ACTION === 'UPDATE') {
-        var data = {};
-        el.find('input, select').each(function() {
-          if ($(this).val()) {
-            data[$(this).attr('bind-to')] = $(this).val();
-          }
-        });
-
-        // 更新用户信息
-        $.ajax({
-          url: '/register/edit',
-          dataType: "json",
-          type:"post",
-          async: true,
-          data: {
-              "user": JSON.stringify([data])
-          },
-          success:function (response) {
-
-          },
-          error: function(error) {
-
-          }
-        });
-      }
     };
     cancelEvent = function() {
 

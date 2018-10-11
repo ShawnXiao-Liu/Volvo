@@ -15,7 +15,7 @@
               用户账号:
             </div>
             <div class="input-content">
-              <input disabled placeholder="" type="text"/>
+              <input bind-to="account" disabled placeholder="" type="text"/>
             </div>
           </div>
         </td>
@@ -28,7 +28,7 @@
               用户角色:
             </div>
             <div class="input-content">
-              <input disabled placeholder="" type="text"/>
+              <input bind-to="ruleId" disabled placeholder="" type="text"/>
             </div>
           </div>
         </td>
@@ -41,7 +41,7 @@
               用户姓名:
             </div>
             <div class="input-content">
-              <input id="name" placeholder="" type="text"/>
+              <input bind-to="name" id="name" placeholder="" type="text"/>
             </div>
           </div>
         </td>
@@ -54,7 +54,7 @@
               绑定手机号:
             </div>
             <div class="input-content">
-              <input id="tel" placeholder="" type="text"/>
+              <input bind-to="tel" id="tel" placeholder="" type="text"/>
             </div>
           </div>
         </td>
@@ -137,14 +137,14 @@
                 return false;
             }
         }
-        console.log(dataMap);
+        dataMap["userId"] = window.sessionStorage.getItem('USER_ID');
         $.ajax({
             url: '/register/edit',
             dataType: "json",
             type:"post",
             async: true,
             data: {
-              "user": JSON.stringify([data])
+              "user": JSON.stringify([dataMap])
             },
             success:function (response) {
                 console.log(response);
@@ -161,10 +161,13 @@
         type:"post",
         async: true,
         data: {
-            userId: userId
+            'userId': window.sessionStorage.getItem('USER_ID')
         },
         success:function (response) {
-            console.log(response);
+          $('[bind-to]').each(function() {
+            var pam = $(this).attr('bind-to');
+            $(this).val(response[pam]);
+          })
         },
         error: function(error) {
 
