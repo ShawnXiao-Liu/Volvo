@@ -198,7 +198,7 @@
         for (var i = 0; i < response.length; i ++) {
           optStr += '<option value="' + response[i].engineeringId + '">' + response[i].engineeringName + '</option>'
         }
-        $('[bind-to="engineeringId"]').html(optStr);
+        $('select[bind-to="engineeringId"]').html(optStr);
       },
       error: function(error) {
       }
@@ -213,7 +213,7 @@
         'userId': window.sessionStorage.getItem('USER_ID')
       },
       success:function (response) {
-        // 初始化页面下拉选
+        // 初始化表格
         bindData('#labelManagementTable', response, 'partId', true);
       },
       error: function(error) {
@@ -225,7 +225,10 @@
     };
 
     updateEvent = function() {
-      var labelId = $(el).parents('tr').attr('p-key');
+      var partId = $(el).parents('tr').attr('p-key');
+      // 更新全局TARGET
+      TARGET_ROW_SET = getTarget('partId', partId);
+
       // 更新方法查询数据/projectManagement /partShow
       $.ajax({
         url: '/projectManagement/partShow',
@@ -234,7 +237,7 @@
         async: true,
         data: {
           'userId': window.sessionStorage.getItem('USER_ID'),
-          'labelId': labelId
+          'partId': partId
         },
         success:function (response) {
           var updateForm = $('.window-content').find('.user-form');
@@ -249,17 +252,54 @@
     };
 
     deleteEvent = function() {
+      var partId = $(el).parents('tr').attr('p-key');
+      // 更新全局TARGET
+      TARGET_ROW_SET = getTarget('partId', partId);
 
+      $.ajax({
+        url: '/equipmentInfo/updateEquipment',
+        dataType: "json",
+        type:"post",
+        async: true,
+        data: {
+          "part": JSON.stringify([{
+            'partId': partId,
+            'status': '1'
+          }])
+        },
+        success:function (response) {
+
+        },
+        error: function(error) {
+
+        }
+      });
     };
 
-    queryEvent = function() {
+    queryEvent = function(el) {
+      var filter = el.dataSets;
 
+      $.ajax({
+        url: '/projectManagement/partShow',
+        dataType: "json",
+        type:"post",
+        async: true,
+        data: {
+          'userId': window.sessionStorage.getItem('USER_ID')
+        },
+        success:function (response) {
+          // 初始化表格
+          bindData('#labelManagementTable', dataFilter(response, filter), 'partId', true);
+        },
+        error: function(error) {
+        }
+      });
     };
 
     confirmEvent = function(el) {
       // 新增操作
       if (ACTION === 'INSERT') {
-        var data = {};
+        var data = TARGET_ROW_SET;
         el.find('input, select').each(function() {
           if ($(this).val()) {
             data[$(this).attr('bind-to')] = $(this).val();
@@ -286,7 +326,7 @@
 
         // 更新操作
       } else if (ACTION === 'UPDATE') {
-        var data = {};
+        var data = TARGET_ROW_SET;
         el.find('input, select').each(function() {
           if ($(this).val()) {
             data[$(this).attr('bind-to')] = $(this).val();
@@ -300,7 +340,6 @@
           type:"post",
           async: true,
           data: {
-            'userId': window.sessionStorage.getItem('USER_ID'),
             "part": JSON.stringify([data])
           },
           success:function (response) {

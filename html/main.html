@@ -501,6 +501,10 @@
 <script>
   // 用户行为标识符
   var ACTION = "";
+  // 全局DATA存储
+  var ROW_SETS = null;
+  // 操作对象存储
+  var TARGET_ROW_SET = null;
 
   var confirmEvent = new Function();
   var cancelEvent = new Function();
@@ -664,12 +668,13 @@
                       // query按键自带属性
                       $('.query').on('click', function() {
                           var dataObj = {};
-                          $('.user-form').find("input[bind-to]").each(function() {
+                          $('.user-form').find("[bind-to]").each(function() {
                               var param = $(this).attr('bind-to');
                               var value = $(this).val();
                               if (value)
                                   dataObj[param] = value;
                           });
+                          this.dataSets = dataObj;
                           queryEvent(this);
                       });
 
@@ -705,6 +710,9 @@
 
   // 动态绑定数据的方法
   function bindData(el, data, mainKey, hasControl) {
+    // 绑定全局对象
+    ROW_SETS = data;
+
     var htmlStr = '';
     if (hasControl)
       hasControl = false;
@@ -728,6 +736,36 @@
       htmlStr += trHtml;
     }
     $(el).find('tbody').html(htmlStr);
+  }
+
+  function getTarget(pkName, pk) {
+    for (var rsI = 0; rsI < ROW_SETS.length; rsI ++) {
+      var o = ROW_SETS[ rsI ];
+      if (ROW_SETS[pkName] === pk)
+        return o;
+    }
+  }
+  
+  function dataFilter(data, filter) {
+    var filtered = [];
+    var temp = data;
+
+    for (var pam in filter) {
+      // 清空被过滤的数据
+      filtered = [];
+
+      // 查询条件
+      var condition = filter[pam];
+      for (var i = 0; i < temp.length; i ++) {
+        var obj = temp[i];
+        var val = obj[pam] + '';
+        if (val.indexOf(condition) >= 0) {
+          filtered.push(obj);
+        }
+      }
+      temp = filtered;
+    }
+    return filtered;
   }
 </script>
 </html>

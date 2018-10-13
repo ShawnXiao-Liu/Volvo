@@ -142,6 +142,7 @@
 
       }
     });
+
     $.ajax({
       url: '/equipmentInfo/getAllEquipmentInfo',
       dataType: "json",
@@ -152,7 +153,7 @@
         for (var i = 0; i < response.length; i ++) {
           optStr += '<option value="' + response[i].equipmentId + '">' + response[i].equipmentName + '</option>'
         }
-        $('[bind-to="equipmentId"]').html(optStr);
+        $('select[bind-to="equipmentId"]').html(optStr);
       },
       error: function(error) {
 
@@ -165,6 +166,9 @@
 
     updateEvent = function(el) {
       var vehicleId = $(el).parents('tr').attr('p-key');
+      // 更新全局TARGET
+      TARGET_ROW_SET = getTarget('vehicleId', vehicleId);
+
       // 更新方法查询数据/equipmentInfo /getVehicle
       $.ajax({
         url: '/equipmentInfo/getVehicle',
@@ -190,13 +194,15 @@
 
     deleteEvent = function(el) {
       var vehicleId = $(el).parents('tr').attr('p-key');
+      // 更新全局TARGET
+      TARGET_ROW_SET = getTarget('vehicleId', vehicleId);
+
       $.ajax({
         url: '/equipmentInfo/updateVehicle',
         dataType: "json",
         type:"post",
         async: true,
         data: {
-            'userId': window.sessionStorage.getItem('USER_ID'),
             "vehicle": JSON.stringify([{
                 'vehicleId': vehicleId,
                 'status': '1'
@@ -211,14 +217,31 @@
       });
     };
 
-    queryEvent = function() {
+    queryEvent = function(el) {
+      var filter = el.dataSets;
 
+      $.ajax({
+        url: '/equipmentInfo/getVehicle',
+        dataType: "json",
+        type:"post",
+        async: true,
+        data: {
+          'userId': window.sessionStorage.getItem('USER_ID')
+        },
+        success:function (response) {
+          // 初始化页面
+          bindData('#carManagementTable', dataFilter(response, filter), 'vehicleId', true);
+        },
+        error: function(error) {
+
+        }
+      });
     };
 
     confirmEvent = function(el) {
       // 新增操作
       if (ACTION === 'INSERT') {
-        var data = {};
+        var data = TARGET_ROW_SET;
         el.find('input, select').each(function() {
           if ($(this).val()) {
             data[$(this).attr('bind-to')] = $(this).val();
@@ -232,7 +255,6 @@
           type:"post",
           async: true,
           data: {
-              'userId': window.sessionStorage.getItem('USER_ID'),
               "vehicle": JSON.stringify([data])
           },
           success:function (response) {
@@ -245,7 +267,7 @@
 
       // 更新操作
       } else if (ACTION === 'UPDATE') {
-        var data = {};
+        var data = TARGET_ROW_SET;
         el.find('input, select').each(function() {
           if ($(this).val()) {
             data[$(this).attr('bind-to')] = $(this).val();

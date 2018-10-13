@@ -102,6 +102,9 @@
 
     updateEvent = function() {
       var ruleId = $(el).parents('tr').attr('p-key');
+      // 更新全局TARGET
+      TARGET_ROW_SET = getTarget('ruleId', ruleId);
+
       $.ajax({
         url: '/roleManagement/show',
         dataType: "json",
@@ -125,13 +128,15 @@
 
     deleteEvent = function() {
       var ruleId = $(el).parents('tr').attr('p-key');
+      // 更新全局TARGET
+      TARGET_ROW_SET = getTarget('ruleId', ruleId);
+
       $.ajax({
         url: '/roleManagement/delete',
         dataType: "json",
         type:"post",
         async: true,
         data: {
-          'userId': window.sessionStorage.getItem('USER_ID'),
           "rule": JSON.stringify([{
               'ruleId': ruleId,
               'ruleName': '1'
@@ -146,14 +151,30 @@
       });
     };
 
-    queryEvent = function() {
+    queryEvent = function(el) {
+      var filter = el.dataSets;
 
+      $.ajax({
+        url: '/roleManagement/show',
+        dataType: "json",
+        type:"post",
+        async: true,
+        data: {
+          'userId': window.sessionStorage.getItem('USER_ID')
+        },
+        success:function (response) {
+          // 初始化页面
+          bindData('#roleManagementTable', dataFilter(response, filter), 'ruleId', true);
+        },
+        error: function(error) {
+        }
+      });
     };
 
     confirmEvent = function(el) {
       // 新增操作
       if (ACTION === 'INSERT') {
-        var data = {};
+        var data = TARGET_ROW_SET;
         el.find('input, select').each(function() {
           if ($(this).val()) {
             data[$(this).attr('bind-to')] = $(this).val();
@@ -180,7 +201,7 @@
 
         // 更新操作
       } else if (ACTION === 'UPDATE') {
-        var data = {};
+        var data = TARGET_ROW_SET;
         el.find('input, select').each(function() {
           if ($(this).val()) {
             data[$(this).attr('bind-to')] = $(this).val();
@@ -194,7 +215,6 @@
           type:"post",
           async: true,
           data: {
-            'userId': window.sessionStorage.getItem('USER_ID'),
             "rule": JSON.stringify([data])
           },
           success:function (response) {

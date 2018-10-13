@@ -177,12 +177,13 @@
         for (var i = 0; i < response.length; i ++) {
           optStr += '<option value="' + response[i].typeId + '">' + response[i].typeName + '</option>'
         }
-        $('[bind-to="equipmentType"]').html(optStr);
+        $('select[bind-to="equipmentType"]').html(optStr);
       },
       error: function(error) {
 
       }
     });
+
     $.ajax({
       url: '/equipmentInfo/getAllEquipmentInfo',
       dataType: "json",
@@ -206,6 +207,9 @@
 
     updateEvent = function(el) {
       var equipmentId = $(el).parents('tr').attr('p-key');
+      // 更新全局TARGET
+      TARGET_ROW_SET = getTarget('equipmentId', equipmentId);
+
       // 更新方法查询数据/equipmentInfo /show
       $.ajax({
         url: '/equipmentInfo/show',
@@ -231,6 +235,9 @@
 
     deleteEvent = function() {
       var equipmentId = $(el).parents('tr').attr('p-key');
+      // 更新全局TARGET
+      TARGET_ROW_SET = getTarget('equipmentId', equipmentId);
+
       $.ajax({
         url: '/equipmentInfo/updateEquipment',
         dataType: "json",
@@ -252,14 +259,31 @@
       });
     };
 
-    queryEvent = function() {
+    queryEvent = function(el) {
+      var filter = el.dataSets;
 
+      $.ajax({
+        url: '/equipmentInfo/getAllEquipmentInfo',
+        dataType: "json",
+        type:"post",
+        async: true,
+        data: {
+          'userId': window.sessionStorage.getItem('USER_ID')
+        },
+        success:function (response) {
+          // 绑定表单数据
+          bindData('#equipmentManagementTable', dataFilter(response, filter), 'equipmentId', true);
+        },
+        error: function(error) {
+
+        }
+      });
     };
 
     confirmEvent = function(el) {
       // 新增操作
       if (ACTION === 'INSERT') {
-        var data = {};
+        var data = TARGET_ROW_SET;
         el.find('input, select').each(function() {
           if ($(this).val()) {
             data[$(this).attr('bind-to')] = $(this).val();
@@ -286,7 +310,7 @@
 
         // 更新操作
       } else if (ACTION === 'UPDATE') {
-        var data = {};
+        var data = TARGET_ROW_SET;
         el.find('input, select').each(function() {
           if ($(this).val()) {
             data[$(this).attr('bind-to')] = $(this).val();
@@ -300,7 +324,6 @@
           type:"post",
           async: true,
           data: {
-            'userId': window.sessionStorage.getItem('USER_ID'),
             "equipment": JSON.stringify([data])
           },
           success:function (response) {

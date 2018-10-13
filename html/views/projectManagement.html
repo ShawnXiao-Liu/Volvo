@@ -142,6 +142,9 @@
 
     updateEvent = function(el) {
       var engineeringId = $(el).parents('tr').attr('p-key');
+      // 更新全局TARGET
+      TARGET_ROW_SET = getTarget('engineeringId', engineeringId);
+
       $.ajax({
         url: '/projectManagement/engineeringShow',
         dataType: "json",
@@ -167,14 +170,30 @@
 
     };
 
-    queryEvent = function() {
-
+    queryEvent = function(el) {
+      var filter = el.dataSets;
+      $.ajax({
+        url: '/projectManagement/engineeringShow',
+        dataType: "json",
+        type:"post",
+        async: true,
+        data: {
+          userId: window.sessionStorage.getItem('USER_ID')
+        },
+        success:function (response) {
+          // 初始化页面
+          bindData('#projectManagementTable', dataFilter(response, filter), 'engineeringId');
+          $('.delete').remove();
+        },
+        error: function(error) {
+        }
+      });
     };
 
     confirmEvent = function(el) {
       // 新增操作
       if (ACTION === 'INSERT') {
-        var data = {};
+        var data = TARGET_ROW_SET;
         el.find('input, select').each(function() {
           if ($(this).val()) {
             data[$(this).attr('bind-to')] = $(this).val();
@@ -188,7 +207,8 @@
           type:"post",
           async: true,
           data: {
-              "engineering": JSON.stringify([data])
+            "userId": window.sessionStorage.getItem('USER_ID'),
+            "engineering": JSON.stringify([data])
           },
           success:function (response) {
 
@@ -200,7 +220,7 @@
 
         // 更新操作
       } else if (ACTION === 'UPDATE') {
-        var data = {};
+        var data = TARGET_ROW_SET;
         el.find('input, select').each(function() {
           if ($(this).val()) {
             data[$(this).attr('bind-to')] = $(this).val();
@@ -214,7 +234,6 @@
           type:"post",
           async: true,
           data: {
-              "userId": window.sessionStorage.getItem('USER_ID'),
               "engineering": JSON.stringify([data])
           },
           success:function (response) {
