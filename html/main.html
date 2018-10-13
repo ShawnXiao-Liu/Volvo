@@ -464,7 +464,7 @@
         </li>
         <li>
           <div class="menu-item pointer" nav-to="characterManagement">
-            角色管理
+            资源分配
           </div>
         </li>
         <li>
@@ -525,7 +525,7 @@
   }
 
   $(document).ready(function() {
-      $.ajax({
+      /*$.ajax({
           url: '/login/getMenu',
           dataType: "json",
           type:"post",
@@ -549,8 +549,8 @@
           error: function(error) {
 
           }
-      });
-
+      });*/
+      onMenuLoad();
       function onMenuLoad() {
           $('.page-container').height($(window).height() - $('.nav-bar').height());
 
@@ -693,7 +693,7 @@
           });
           console.log('<===== 成功执行menuOnload事件 =====>');
 
-          $(".menu-item[nav-to='carManagement']").click();
+          $(".menu-item[nav-to='characterManagement']").click();
 
           $('#closeMask').on('click', function() {
               $('.window-mask').fadeOut(200).find('.window-content').html('');

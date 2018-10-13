@@ -4,10 +4,11 @@
     left: 0;
     top: 0;
     bottom: 0em;
-    width: 19em;
+    width: 20%;
     margin: 0.5em;
-    overflow-y: scroll;
-    border: 1px solid #D2D2D2;
+    padding: 0.5em;
+    border: 2px solid #515151;
+    border-radius: 8px;
     color: #333333;
   }
   .character-info {
@@ -16,12 +17,17 @@
     right: 0;
     top: 0;
     bottom: 0.5em;
-    margin: 0.5em;
-    margin-left: 0;
+    margin: 0.5em 0.5em 0.5em 0;
     min-width: 960px;
   }
+  .character-list > ul {
+    background-color: #FFFFFF;
+    height: 100%;
+    border: 2px solid #d2d2d2;
+    border-radius: 8px;
+  }
   .character-info > .character-auth-detail {
-    height: 40%;
+    height: 100%;
     background-color: #FFFFFF;
   }
   .character-info > .character-member-detail {
@@ -30,13 +36,37 @@
     background-color: #FFFFFF;
   }
   .character-list .character-item {
-    font-size: 0.875em;
-    padding: 0.25em;
+    position: relative;
+    font-size: 1em;
+    padding: 0.25em 0.75em;
+    height: 2.5em;
+    line-height: 2.5em;
+    font-weight: 600;
     border-bottom: 1px dashed #D2D2D2;
   }
+  .character-item > .select-control {
+    position: absolute;
+    margin: 0.25em;
+    height: 1.5em;
+    width: 1.5em;
+    border: 1px solid #d2d2d2;
+  }
+  .select-control > .select {
+    margin: 0.35em;
+    height: 0.7em;
+    width: 0.7em;
+    background-color: #5fc711;
+  }
+
+  .character-item > .item-name {
+    left: 3em;
+    position: absolute;
+    height: 2em;
+    line-height: 2em;
+  }
   .character-item:hover {
-    background-color: #0066CC;
-    color: #FFFFFF;
+    background-color: #E3E3E3;
+    color: #515151;
   }
   table {
     width: 100%;
@@ -49,49 +79,177 @@
   }
 </style>
 <div class="character-list">
-  <ul style="background-color: #FFFFFF; height: 100%;">
-    <li class="character-item static pointer">
+  <ul id="rules">
+    <li class="character-item static pointer rule">
       <div>admin</div>
-    </li>
-    <li class="character-item static pointer">
-      <div>config</div>
-    </li>
-    <li class="character-item static pointer">
-      <div>author</div>
-    </li>
-    <li class="character-item static pointer">
-      <div>生产商</div>
-    </li>
-    <li class="character-item static pointer">
-      <div>供应商</div>
-    </li>
-    <li class="character-item static pointer">
-      <div>施工方</div>
     </li>
   </ul>
 </div>
 
-<div class="character-info">
-  <div class="character-auth-detail">
-    <table border="1" cellspacing="0">
-      <tr>
-        <th width="15%">编号</th>
-        <th width="40%">用户名称</th>
-        <th width="30%">联系方式</th>
-        <th width="15%">操作</th>
-      </tr>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>啦啦啦啦</td>
-          <td>13074147777</td>
-          <td><button>删除</button></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="character-member-detail">
-    456
-  </div>
+<div class="character-list" style="left: 22%; width: 28%">
+  <ul id="ruleMenu">
+    <li class="character-item static ">
+      <div class="select-control pointer"><div class=""></div></div>
+      <div class="item-name">admin</div>
+    </li>
+    <li class="character-item static ">
+      <div class="select-control pointer"><div class=""></div></div>
+      <div class="item-name">admin</div>
+    </li>
+    <li class="character-item static ">
+      <div class="select-control pointer"><div class=""></div></div>
+      <div class="item-name">admin</div>
+    </li>
+  </ul>
 </div>
+
+<style>
+  .button {
+    position: absolute;
+    left: 52%;
+    width: 16%;
+    height: 2.5rem;
+    font-size: 1em;
+    border-width: 2px;
+    border-style: outset;
+    border-color: buttonface;
+    border-image: initial;
+  }
+</style>
+<button class="button add" style="top: 32.5%">添加&gt;&gt;&gt;</button>
+<button class="button remove" style="top: 42.5%">&lt;&lt;&lt;移除</button>
+
+<div class="character-list" style="left: 70%; width: 28%">
+  <ul id="otherMenu">
+    <li class="character-item static ">
+      <div class="select-control pointer"><div class=""></div></div>
+      <div class="item-name">admin</div>
+    </li>
+    <li class="character-item static ">
+      <div class="select-control pointer"><div class=""></div></div>
+      <div class="item-name">admin</div>
+    </li>
+    <li class="character-item static ">
+      <div class="select-control pointer"><div class=""></div></div>
+      <div class="item-name">admin</div>
+    </li>
+  </ul>
+</div>
+<script>
+  (function() {
+    var ruleId = '';
+
+    $.ajax({
+      url: '/permissionManagement/getAllRole',
+      dataType: "json",
+      type: "post",
+      async: false,
+      success: function (response) {
+        console.log(response);
+        var menuHtml = '';
+        for ( var i = 0; i < response.length; i++ ) {
+          menuHtml += '<li rule-id="' + response[i].ruleId  + '" class="character-item static pointer rule">\
+                        <div>' + response[i].ruleName + '</div>\
+                      </li>'
+        }
+        $('.rules').html(menuHtml);
+
+        $('.rule').on('click', function() {
+          ruleId = $(this).attr('rule-id');
+          $.ajax({
+            url: '/permissionManagement/getRuleMenu',
+            dataType: "json",
+            type: "post",
+            async: false,
+            success: function (response) {
+              console.log(response);
+              var menuHtml = '';
+              for ( var i = 0; i < response.length; i++ ) {
+                menuHtml += '<li class="character-item static ">\
+                              <div class="select-control pointer">\
+                                <div class="" menu-path="' + response[i].menuPath  +'"></div>\
+                              </div>\
+                              <div class="item-name">' + response[i].menuName +'</div>\
+                            </li>'
+              }
+              $('.ruleMenu').html(menuHtml).find('.select-control').on('click', function() {
+                $(this).find('div').toggleClass('select');
+              });
+            },
+            error: function (error) {
+
+            }
+          });
+
+          $.ajax({
+            url: '/permissionManagement/getOtherMenu',
+            dataType: "json",
+            type: "post",
+            async: false,
+            success: function (response) {
+              console.log(response);
+              var menuHtml = '';
+              for ( var i = 0; i < response.length; i++ ) {
+                menuHtml += '<li class="character-item static ">\
+                              <div class="select-control pointer">\
+                                <div class="" menu-path="' + response[i].menuPath  +'"></div>\
+                              </div>\
+                              <div class="item-name">' + response[i].menuName +'</div>\
+                            </li>'
+              }
+              $('.otherMenu').html(menuHtml).find('.select-control').on('click', function() {
+                $(this).find('div').toggleClass('select');
+              })
+            },
+            error: function (error) {
+
+            }
+          });
+        });
+
+      },
+      error: function (error) {
+
+      }
+    });
+
+    $('.add').on('click', function() {
+      var menuData = [];
+      $('#ruleMenu').find('[menu-path]').each(function() {
+        menuData.push({
+          ruleId: ruleId,
+          menuPath: $(this).attr('menu-path')
+        })
+      });
+
+      $('#otherMenu').find('.select').each(function() {
+        menuData.push({
+          ruleId: ruleId,
+          menuPath: $(this).attr('menu-path')
+        })
+        var obj = $(this).parents('li');
+        $('#ruleMenu').append(obj);
+        obj.remove();
+      });
+
+
+    });
+
+    $('.remove').on('click', function() {
+      var menuData = [];
+      $('#ruleMenu').find('[menu-path]').each(function() {
+        if ($(this).hasClass('select')) {
+          var obj = $(this).parents('li');
+          $('#otherMenu').append(obj);
+          obj.remove();
+        } else {
+          menuData.push({
+            ruleId: ruleId,
+            menuPath: $(this).attr('menu-path')
+          })
+        }
+      });
+    });
+
+  }());
+</script>
