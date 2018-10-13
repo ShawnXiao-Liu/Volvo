@@ -232,7 +232,21 @@
         obj.remove();
       });
 
+      $.ajax({
+        url: '/permissionManagement/setRule',
+        dataType: "json",
+        type: "post",
+        async: false,
+        data: {
+          'permission': menuData
+        },
+        success: function (response) {
 
+        },
+        error: function (error) {
+
+        }
+      });
     });
 
     $('.remove').on('click', function() {
@@ -247,6 +261,22 @@
             ruleId: ruleId,
             menuPath: $(this).attr('menu-path')
           })
+        }
+      });
+
+      $.ajax({
+        url: '/permissionManagement/setRule',
+        dataType: "json",
+        type: "post",
+        async: false,
+        data: {
+          'permission': menuData
+        },
+        success: function (response) {
+
+        },
+        error: function (error) {
+
         }
       });
     });
