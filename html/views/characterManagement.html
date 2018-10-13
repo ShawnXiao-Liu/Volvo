@@ -167,7 +167,7 @@
               for ( var i = 0; i < response.length; i++ ) {
                 menuHtml += '<li class="character-item static ">\
                               <div class="select-control pointer">\
-                                <div class="" menu-path="' + response[i].menuPath  +'"></div>\
+                                <div class="" menu-id="' + response[i].menuId +'"></div>\
                               </div>\
                               <div class="item-name">' + response[i].menuName +'</div>\
                             </li>'
@@ -192,7 +192,7 @@
               for ( var i = 0; i < response.length; i++ ) {
                 menuHtml += '<li class="character-item static ">\
                               <div class="select-control pointer">\
-                                <div class="" menu-path="' + response[i].menuPath  +'"></div>\
+                                <div class="" menu-id="' + response[i].menuId +'"></div>\
                               </div>\
                               <div class="item-name">' + response[i].menuName +'</div>\
                             </li>'
@@ -215,25 +215,25 @@
 
     $('.add').on('click', function() {
       var menuData = [];
-      $('#ruleMenu').find('[menu-path]').each(function() {
+      $('#ruleMenu').find('[menu-id]').each(function() {
         menuData.push({
           ruleId: ruleId,
-          menuPath: $(this).attr('menu-path')
+          menuId: $(this).attr('menu-id')
         })
       });
 
       $('#otherMenu').find('.select').each(function() {
         menuData.push({
           ruleId: ruleId,
-          menuPath: $(this).attr('menu-path')
-        })
+          menuId: $(this).attr('menu-id')
+        });
         var obj = $(this).parents('li');
         $('#ruleMenu').append(obj);
         obj.remove();
       });
 
       $.ajax({
-        url: '/permissionManagement/setRule',
+        url: '/permissionManagement/changePermission',
         dataType: "json",
         type: "post",
         async: false,
@@ -251,7 +251,7 @@
 
     $('.remove').on('click', function() {
       var menuData = [];
-      $('#ruleMenu').find('[menu-path]').each(function() {
+      $('#ruleMenu').find('[menu-id]').each(function() {
         if ($(this).hasClass('select')) {
           var obj = $(this).parents('li');
           $('#otherMenu').append(obj);
@@ -259,14 +259,14 @@
         } else {
           menuData.push({
             ruleId: ruleId,
-            menuPath: $(this).attr('menu-path')
+            menuId: $(this).attr('menu-id')
           })
         }
       });
 
 
       $.ajax({
-        url: '/permissionManagement/setRule',
+        url: '/permissionManagement/changePermission',
         dataType: "json",
         type: "post",
         async: false,
