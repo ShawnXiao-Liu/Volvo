@@ -99,6 +99,29 @@
 </div>
 <script>
 (function() {
+    var userData = null;
+
+    $.ajax({
+      url: '/register/userInfo',
+      dataType: "json",
+      type:"post",
+      async: true,
+      data: {
+        'userId': window.sessionStorage.getItem('USER_ID')
+      },
+      success:function (response) {
+        userData = response;
+
+        $('[bind-to]').each(function() {
+          var pam = $(this).attr('bind-to');
+          $(this).val(response[pam]);
+        })
+      },
+      error: function(error) {
+
+      }
+    });
+
     $('.update_pwd').on('click', function() {
         if ( $(this).hasClass('cancel-modify') ) {
             $('.new-pwd').hide();
@@ -110,7 +133,7 @@
     });
 
     $('.update_info').on('click', function() {
-        var dataMap = {};
+        var dataMap = userData;
         var name = $('#name').val();
         var tel = $('#tel').val();
         if (name !== ""){
@@ -153,25 +176,6 @@
 
             }
         });
-    });
-    /* 初始化select码表 */
-   $.ajax({
-        url: '/register/userInfo',
-        dataType: "json",
-        type:"post",
-        async: true,
-        data: {
-            'userId': window.sessionStorage.getItem('USER_ID')
-        },
-        success:function (response) {
-          $('[bind-to]').each(function() {
-            var pam = $(this).attr('bind-to');
-            $(this).val(response[pam]);
-          })
-        },
-        error: function(error) {
-
-        }
     });
 })();
 </script>
