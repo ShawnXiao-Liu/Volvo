@@ -233,7 +233,7 @@
       });
     };
 
-    deleteEvent = function() {
+    deleteEvent = function(el) {
       var equipmentId = $(el).parents('tr').attr('p-key');
       // 更新全局TARGET
       TARGET_ROW_SET = getTarget('equipmentId', equipmentId);

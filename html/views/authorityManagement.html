@@ -100,7 +100,7 @@
 
     };
 
-    updateEvent = function() {
+    updateEvent = function(el) {
       var ruleId = $(el).parents('tr').attr('p-key');
       // 更新全局TARGET
       TARGET_ROW_SET = getTarget('ruleId', ruleId);
@@ -126,7 +126,7 @@
       });
     };
 
-    deleteEvent = function() {
+    deleteEvent = function(el) {
       var ruleId = $(el).parents('tr').attr('p-key');
       // 更新全局TARGET
       TARGET_ROW_SET = getTarget('ruleId', ruleId);
