@@ -120,7 +120,7 @@
       },
       success:function (response) {
         // 初始化页面
-        bindData('#projectManagementTable', response, 'engineeringId');
+        bindData('#projectManagementTable', response, 'engineeringId', true);
         $('.delete').remove();
       },
       error: function(error) {
@@ -151,6 +151,8 @@
             var pam = $(this).attr('bind-to');
             $(this).val( response[pam] );
           });
+
+          updateForm.find('[bind-to="engineeringId"]').prop('disable', true);
         },
         error: function(error) {
         }
@@ -173,7 +175,7 @@
         },
         success:function (response) {
           // 初始化页面
-          bindData('#projectManagementTable', dataFilter(response, filter), 'engineeringId');
+          bindData('#projectManagementTable', dataFilter(response, filter), 'engineeringId', true);
           $('.delete').remove();
         },
         error: function(error) {
