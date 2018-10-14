@@ -25,7 +25,9 @@
                 所属标段:
               </div>
               <div class="input-content">
-                <input bind-to="partId" placeholder="" type="text"/>
+                <select bind-to="partId" placeholder="" type="text">
+
+                </select>
               </div>
             </div>
           </td>
@@ -144,6 +146,25 @@
     });
 
     $.ajax({
+      url: '/projectManagement/partShow',
+      dataType: "json",
+      type:"post",
+      async: true,
+      data: {
+        'userId': window.sessionStorage.getItem('USER_ID')
+      },
+      success:function (response) {
+        var optStr = "";
+        for (var i = 0; i < response.length; i ++) {
+          optStr += '<option value="' + response[i].partId + '">' + response[i].partName + '</option>'
+        }
+        $('select[bind-to="partId"]').html(optStr);
+      },
+      error: function(error) {
+      }
+    });
+
+    $.ajax({
       url: '/equipmentInfo/getAllEquipmentInfo',
       dataType: "json",
       type:"post",
@@ -256,7 +277,8 @@
           type:"post",
           async: true,
           data: {
-              "vehicle": JSON.stringify([data])
+            'userId': window.sessionStorage.getItem('USER_ID'),
+            "vehicle": JSON.stringify([data])
           },
           success:function (response) {
 
@@ -282,7 +304,6 @@
           type:"post",
           async: true,
           data: {
-            'userId': window.sessionStorage.getItem('USER_ID'),
             "vehicle": JSON.stringify([data])
           },
           success:function (response) {

@@ -215,6 +215,12 @@
       success:function (response) {
         // 初始化表格
         bindData('#labelManagementTable', response, 'partId', true);
+        $(' td[bind-to="partPredictStartTime"],\
+            td[bind-to="partPredictEndTime"],\
+            td[bind-to="partRealisticStartTime"],\
+            td[bind-to="partRealisticEndTime"]').each(function() {
+            $(this).html( parseDate($(this).html()) );
+        });
       },
       error: function(error) {
       }
@@ -290,6 +296,12 @@
         success:function (response) {
           // 初始化表格
           bindData('#labelManagementTable', dataFilter(response, filter), 'partId', true);
+          $(' td[bind-to="partPredictStartTime"],\
+            td[bind-to="partPredictEndTime"],\
+            td[bind-to="partRealisticStartTime"],\
+            td[bind-to="partRealisticEndTime"]').each(function() {
+            $(this).html( parseDate($(this).html()) );
+          });
         },
         error: function(error) {
         }

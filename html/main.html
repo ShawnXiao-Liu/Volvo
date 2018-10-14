@@ -525,7 +525,7 @@
   }
 
   $(document).ready(function() {
-      /*$.ajax({
+      $.ajax({
           url: '/login/getMenu',
           dataType: "json",
           type:"post",
@@ -549,7 +549,7 @@
           error: function(error) {
 
           }
-      });*/
+      });
       onMenuLoad();
       function onMenuLoad() {
           $('.page-container').height($(window).height() - $('.nav-bar').height());
@@ -722,7 +722,7 @@
       var trHtml = "<tr p-key='" + d[mainKey] + "'>";
       $(el).find('th[bind-to]').each(function() {
         var pam = $(this).attr('bind-to');
-        trHtml += '<td>' + d[pam] + '</td>'
+        trHtml += '<td bind-to="' + pam + '">' + d[pam] + '</td>'
       });
       if (hasControl) {
         trHtml += '  <td>' +
@@ -766,6 +766,18 @@
       temp = filtered;
     }
     return filtered;
+  }
+
+  function parseDate(timestamp) {
+    var date = new Date(timestamp);
+    var y = date.getFullYear();
+    var m = (date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
+    var d = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+    var H = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
+    var M = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+    var S = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
+
+    return [y, '-', m, '-', d, ' ', H, ':', M, ':', S].join('');
   }
 </script>
 </html>
