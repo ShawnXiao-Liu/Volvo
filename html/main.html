@@ -715,7 +715,7 @@
     ROW_SETS = data;
 
     var htmlStr = '';
-    if (hasControl)
+    if (!hasControl)
       hasControl = false;
     for (var i = 0; i <data.length; i++) {
       var d = data[i];
