@@ -552,6 +552,7 @@
           }
       });
       onMenuLoad();
+
       function onMenuLoad() {
           $('.page-container').height($(window).height() - $('.nav-bar').height());
 
@@ -644,28 +645,6 @@
                           insertEvent($('.window-content').find('.user-form'));
                       });
 
-                      // update按键自带属性
-                      $('.update').on('click', function() {
-                          ACTION = 'UPDATE';
-                          $('.window-mask').fadeIn(200);
-                          $('.window-content').html('<div class="user-form">' +  $('.user-form').html() + '</div>' ).find('button').remove();
-                          var formHeight = $('.window-content').find('.user-form').height();
-                          $('.window-content').height(formHeight + 64).append('<button class="confirm c-confirm" style="left:34.5%">确认</button><button class="cancel c-cancel" style="left:50.5%">取消</button>');
-
-                          $('.confirm').on('click', function() {
-                              confirmEvent($('.window-content').find('.user-form'));
-
-                              $('.window-mask').fadeOut(200).find('.window-content').html('');
-                          });
-
-                          $('.cancel').on('click', function() {
-                              cancelEvent($('.window-content').find('.user-form'));
-
-                              $('.window-mask').fadeOut(200).find('.window-content').html('');
-                          });
-                          updateEvent(this);
-                      });
-
                       // query按键自带属性
                       $('.query').on('click', function() {
                           var dataObj = {};
@@ -677,10 +656,6 @@
                           });
                           this.dataSets = dataObj;
                           queryEvent(this);
-                      });
-
-                      $('.delete').on('click', function() {
-                          deleteEvent(this);
                       });
 
                   });
@@ -737,6 +712,32 @@
       htmlStr += trHtml;
     }
     $(el).find('tbody').html(htmlStr);
+
+    // update按键自带属性
+    $('.update').on('click', function() {
+      ACTION = 'UPDATE';
+      $('.window-mask').fadeIn(200);
+      $('.window-content').html('<div class="user-form">' +  $('.user-form').html() + '</div>' ).find('button').remove();
+      var formHeight = $('.window-content').find('.user-form').height();
+      $('.window-content').height(formHeight + 64).append('<button class="confirm c-confirm" style="left:34.5%">确认</button><button class="cancel c-cancel" style="left:50.5%">取消</button>');
+
+      $('.confirm').on('click', function() {
+        confirmEvent($('.window-content').find('.user-form'));
+
+        $('.window-mask').fadeOut(200).find('.window-content').html('');
+      });
+
+      $('.cancel').on('click', function() {
+        cancelEvent($('.window-content').find('.user-form'));
+
+        $('.window-mask').fadeOut(200).find('.window-content').html('');
+      });
+      updateEvent(this);
+    });
+
+    $('.delete').on('click', function() {
+      deleteEvent(this);
+    });
   }
 
   function getTarget(pkName, pk) {

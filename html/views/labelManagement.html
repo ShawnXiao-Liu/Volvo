@@ -232,8 +232,6 @@
 
     updateEvent = function(el) {
       var partId = $(el).parents('tr').attr('p-key');
-      // 更新全局TARGET
-      TARGET_ROW_SET = getTarget('partId', partId);
 
       // 更新方法查询数据/projectManagement /partShow
       $.ajax({
@@ -246,6 +244,7 @@
           'partId': partId
         },
         success:function (response) {
+          TARGET_ROW_SET = response;
           var updateForm = $('.window-content').find('.user-form');
           updateForm.find('[bind-to]').each(function() {
             var pam = $(this).attr('bind-to');

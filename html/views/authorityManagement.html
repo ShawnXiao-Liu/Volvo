@@ -102,8 +102,6 @@
 
     updateEvent = function(el) {
       var ruleId = $(el).parents('tr').attr('p-key');
-      // 更新全局TARGET
-      TARGET_ROW_SET = getTarget('ruleId', ruleId);
 
       $.ajax({
         url: '/roleManagement/show',
@@ -115,6 +113,7 @@
           'ruleId': ruleId
         },
         success:function (response) {
+          TARGET_ROW_SET = response;
           var updateForm = $('.window-content').find('.user-form');
           updateForm.find('[bind-to]').each(function() {
             var pam = $(this).attr('bind-to');

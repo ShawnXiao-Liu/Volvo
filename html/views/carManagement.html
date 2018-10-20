@@ -80,24 +80,17 @@
       <table border="1" id="carManagementTable">
         <thead class="table-head">
         <tr>
-          <th>设备编号</th>
-          <th>设备名称</th>
-          <th>设备类型</th>
-          <th>工作时间</th>
-          <th>回传时间</th>
-          <th>入网时间</th>
+          <th bind-to="vehicleId">车辆编号</th>
+          <th bind-to="vehicleName">车辆名称</th>
+          <th bind-to="partName">设备类型</th>
+          <th bind-to="vehicleRollingWidth">车辆碾压宽度</th>
+          <th bind-to="equipmentName">绑定设备</th>
           <th>操作</th>
         </tr>
         </thead>
         <tbody>
         <tr>
-          <td>表格数据1</td>
-          <td>表格数据2</td>
-          <td>表格数据3</td>
-          <td>表格数据4</td>
-          <td>表格数据5</td>
-          <td>表格数据6</td>
-          <td>删除\修改</td>
+
         </tr>
         </tbody>
       </table>
@@ -188,8 +181,6 @@
 
     updateEvent = function(el) {
       var vehicleId = $(el).parents('tr').attr('p-key');
-      // 更新全局TARGET
-      TARGET_ROW_SET = getTarget('vehicleId', vehicleId);
 
       // 更新方法查询数据/equipmentInfo /getVehicle
       $.ajax({
@@ -202,6 +193,7 @@
           'vehicleId': vehicleId
         },
         success:function (response) {
+          TARGET_ROW_SET = response;
           var updateForm = $('.window-content').find('.user-form');
           updateForm.find('[bind-to]').each(function() {
             var pam = $(this).attr('bind-to');
