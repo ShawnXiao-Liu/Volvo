@@ -223,7 +223,7 @@
             }])
         },
         success:function (response) {
-
+          $('.query').trigger('click');
         },
         error: function(error) {
 
@@ -273,7 +273,7 @@
             "vehicle": JSON.stringify([data])
           },
           success:function (response) {
-
+            $('.query').trigger('click');
           },
           error: function(error) {
 
@@ -299,7 +299,7 @@
             "vehicle": JSON.stringify([data])
           },
           success:function (response) {
-
+            $('.query').trigger('click');
           },
           error: function(error) {
 

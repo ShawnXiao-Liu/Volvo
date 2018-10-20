@@ -273,6 +273,7 @@
           }])
         },
         success:function (response) {
+          $('.query').trigger('click');
 
         },
         error: function(error) {
@@ -328,6 +329,7 @@
             "part": JSON.stringify([data])
           },
           success:function (response) {
+            $('.query').trigger('click');
 
           },
           error: function(error) {
@@ -354,6 +356,7 @@
             "part": JSON.stringify([data])
           },
           success:function (response) {
+            $('.query').trigger('click');
 
           },
           error: function(error) {

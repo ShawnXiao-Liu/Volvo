@@ -142,6 +142,7 @@
           }])
         },
         success:function (response) {
+          $('.query').trigger('click');
 
         },
         error: function(error) {
@@ -191,6 +192,7 @@
             "rule": JSON.stringify([data])
           },
           success:function (response) {
+            $('.query').trigger('click');
 
           },
           error: function(error) {
@@ -217,6 +219,7 @@
             "rule": JSON.stringify([data])
           },
           success:function (response) {
+            $('.query').trigger('click');
 
           },
           error: function(error) {
