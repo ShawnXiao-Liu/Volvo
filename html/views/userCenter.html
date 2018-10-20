@@ -167,7 +167,8 @@
             type:"post",
             async: true,
             data: {
-              "user": JSON.stringify([dataMap])
+              "user": JSON.stringify([dataMap]),
+              'userId': window.sessionStorage.getItem('USER_ID')
             },
             success:function (response) {
                 console.log(response);
