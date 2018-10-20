@@ -262,7 +262,7 @@
       TARGET_ROW_SET = getTarget('partId', partId);
 
       $.ajax({
-        url: '/equipmentInfo/updateEquipment',
+        url: '/equipmentInfo/changePart',
         dataType: "json",
         type:"post",
         async: true,
@@ -348,7 +348,7 @@
 
         // 更新车辆信息
         $.ajax({
-          url: '/projectManagement/changeEngineering',
+          url: '/projectManagement/changePart',
           dataType: "json",
           type:"post",
           async: true,

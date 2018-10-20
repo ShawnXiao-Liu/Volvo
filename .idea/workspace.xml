@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="735cdafa-231e-418e-b25c-3fb3fb7456df" name="Default Changelist" comment="表端 工程 设置宽度">
+    <list default="true" id="735cdafa-231e-418e-b25c-3fb3fb7456df" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/html/main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/html/views/labelManagement.html" beforeDir="false" afterPath="$PROJECT_DIR$/html/views/labelManagement.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -120,11 +120,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="main.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/html/main.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="773" column="25" selection-start-line="773" selection-start-column="25" selection-end-line="773" selection-end-column="25" />
+            <state relative-caret-position="278">
+              <caret line="756" column="20" lean-forward="true" selection-start-line="756" selection-start-column="20" selection-end-line="756" selection-end-column="20" />
               <folding>
                 <element signature="n#style#0;n#button#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#button#1;n#!!top" expanded="true" />
@@ -151,7 +151,7 @@
       <file leaf-file-name="projectManagement.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/html/views/projectManagement.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="354">
+            <state relative-caret-position="-672">
               <caret line="74" column="16" lean-forward="true" selection-start-line="74" selection-start-column="16" selection-end-line="74" selection-end-column="36" />
               <folding>
                 <element signature="n#style#0;n#th#2;n#tr#0;n#thead#0;n#table#0;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
@@ -183,11 +183,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="labelManagement.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="labelManagement.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/html/views/labelManagement.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="354">
-              <caret line="221" selection-start-line="220" selection-start-column="66" selection-end-line="221" />
+            <state relative-caret-position="544">
+              <caret line="264" column="39" selection-start-line="264" selection-start-column="39" selection-end-line="264" selection-end-column="39" />
               <folding>
                 <element signature="n#style#0;n#th#9;n#tr#0;n#thead#0;n#table#0;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
               </folding>
@@ -237,8 +237,8 @@
         <option value="$PROJECT_DIR$/html/views/equipmentManagement.html" />
         <option value="$PROJECT_DIR$/html/views/authorityManagement.html" />
         <option value="$PROJECT_DIR$/html/views/projectManagement.html" />
-        <option value="$PROJECT_DIR$/html/views/labelManagement.html" />
         <option value="$PROJECT_DIR$/html/main.html" />
+        <option value="$PROJECT_DIR$/html/views/labelManagement.html" />
       </list>
     </option>
   </component>
@@ -1344,11 +1344,18 @@
       <option name="project" value="LOCAL" />
       <updated>1540020700571</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="时间格式化">
+      <created>1540021287921</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1540021287921</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="91912000" />
+    <option name="totallyTimeSpent" value="92070000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1409,7 +1416,8 @@
     <MESSAGE value="更新方法修改&#10;车辆字段绑定&#10;事件绑定" />
     <MESSAGE value="更新、删除后进行一次查询" />
     <MESSAGE value="表端 工程 设置宽度" />
-    <option name="LAST_COMMIT_MESSAGE" value="表端 工程 设置宽度" />
+    <MESSAGE value="时间格式化" />
+    <option name="LAST_COMMIT_MESSAGE" value="时间格式化" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/html/test.html" />
@@ -1462,13 +1470,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html/views/equipmentManagement.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="330" column="41" selection-start-line="330" selection-start-column="41" selection-end-line="330" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/html/views/carManagement.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -1480,9 +1481,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/html/main.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="278">
+          <caret line="756" column="20" lean-forward="true" selection-start-line="756" selection-start-column="20" selection-end-line="756" selection-end-column="20" />
+          <folding>
+            <element signature="n#style#0;n#button#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#1;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/html/views/projectManagement.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="354">
+        <state relative-caret-position="-672">
           <caret line="74" column="16" lean-forward="true" selection-start-line="74" selection-start-column="16" selection-end-line="74" selection-end-column="36" />
           <folding>
             <element signature="n#style#0;n#th#2;n#tr#0;n#thead#0;n#table#0;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
@@ -1491,25 +1505,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html/views/labelManagement.html">
+    <entry file="file://$PROJECT_DIR$/html/views/equipmentManagement.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="354">
-          <caret line="221" selection-start-line="220" selection-start-column="66" selection-end-line="221" />
-          <folding>
-            <element signature="n#style#0;n#th#9;n#tr#0;n#thead#0;n#table#0;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="506">
+          <caret line="330" column="41" selection-start-line="330" selection-start-column="41" selection-end-line="330" selection-end-column="41" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html/main.html">
+    <entry file="file://$PROJECT_DIR$/html/views/labelManagement.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="544">
-          <caret line="773" column="25" selection-start-line="773" selection-start-column="25" selection-end-line="773" selection-end-column="25" />
+          <caret line="264" column="39" selection-start-line="264" selection-start-column="39" selection-end-line="264" selection-end-column="39" />
           <folding>
-            <element signature="n#style#0;n#button#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#9;n#tr#0;n#thead#0;n#table#0;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
